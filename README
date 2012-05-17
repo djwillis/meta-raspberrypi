@@ -29,3 +29,21 @@ It is preferred that people raise pull requests using GIThub by forking the appr
                    (More info on achieving this can be found at http://help.github.com/send-pull-requests/)
 
 Layer maintainer: John Willis <John.Willis at distant-earth.com>
+
+
+ Yocto BSP Layer - RaspberryPi
+-------------------------------
+
+This layer depends on:
+
+URI: git://git.yoctoproject.org/poky
+branch: master
+revision: HEAD
+
+How to use it:
+
+1. source poky/oe-init-build-env rpi-build
+2. Add meta-raspberrypi in bblayers.conf
+3  Set MACHINE to raspberrypi in local.conf
+4. Modify distro to DISTRO ?= "poky-raspberrypi" in local.conf
+5. bitbake rpi-hwup-image
