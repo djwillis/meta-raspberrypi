@@ -1,8 +1,3 @@
-inherit image
-
-# Add the fstypes we need
-IMAGE_FSTYPES_append = " tar.bz2 rpi-sdimg"
-
 # Ensure required utilities are present
 IMAGE_DEPENDS_rpi-sdimg = "genext2fs-native dosfstools-native e2fsprogs-native bcm2835-bootfiles bcm2835-kernel-image"
 
