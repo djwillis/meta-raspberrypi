@@ -22,13 +22,13 @@ IMAGE_CMD_rpi-sdimg () {
 
 	# If an SD image is already present, reuse and reformat it
 	if [ ! -e ${SDIMG} ] ; then
-		dd if=/dev/zero of=${SDIMG} bs=$(echo '255 * 63 * 512' | bc) count=${SDIMG_SIZE}
+		dd if=/dev/zero of=${SDIMG} bs=$(expr 255 \* 63 \* 512) count=${SDIMG_SIZE}
 	fi
 
 	# Create partition table
 	dd if=/dev/zero of=${SDIMG} bs=1024 count=1024 conv=notrunc
 	SIZE=$(ls -l ${SDIMG} | awk '{print $5}')
-	CYLINDERS=$(echo $SIZE/255/63/512 | bc)
+	CYLINDERS=$(expr $SIZE / 255 / 63 / 512 )
 	{
 	echo ,9,0x0C,*
 	echo ,,,-
@@ -37,12 +37,12 @@ IMAGE_CMD_rpi-sdimg () {
 	# Get partition offsets and sizes
 	BOOT_OFFSET_SECT=63
 	FS_OFFSET_SECT=$(/sbin/fdisk -l -u ${SDIMG} 2>&1 | grep Linux | perl -p -i -e "s/\s+/ /"|cut -d " " -f 2)
-	FS_OFFSET=$(echo "$FS_OFFSET_SECT * 512" | bc)
+	FS_OFFSET=$(expr $FS_OFFSET_SECT \* 512)
 	FS_SIZE_BLOCKS=$(/sbin/fdisk -l -u ${SDIMG} 2>&1 | grep Linux | perl -p -i -e "s/\s+/ /g" |cut -d " " -f 4 | cut -d "+" -f 1)
 	BOOT_SIZE_BLOCKS=$(/sbin/fdisk -l -u ${SDIMG} 2>&1 | grep FAT | perl -p -i -e "s/\s+/ /g"|cut -d " " -f 5)
 
 	echo "Creating boot filesystem"
-	FAT_BLOCKS=$(echo "$BOOT_SIZE_BLOCKS / 16 * 16" | bc)
+	FAT_BLOCKS=$(expr $BOOT_SIZE_BLOCKS / 16 \* 16)
 	dd if=/dev/zero of=${SDIMG}.vfat bs=1024 count=$FAT_BLOCKS
 	/sbin/mkfs.vfat -F 32 ${SDIMG}.vfat -n ${BOOTPARTNAME} $FAT_BLOCKS
 
@@ -70,7 +70,7 @@ IMAGE_CMD_rpi-sdimg () {
 	# Prepare rootfs partition
 	echo "Creating root filesystem of type ${ROOTFSTYPE}"
 
-	FS_NUM_INODES=$(echo $FS_SIZE_BLOCKS / 4 | bc)
+	FS_NUM_INODES=$(expr $FS_SIZE_BLOCKS / 4 )
 
 	TMP_ROOTFS=${SDIMG}.rootfs
 	dd if=/dev/zero of=$TMP_ROOTFS bs=1024 count=$FS_SIZE_BLOCKS
