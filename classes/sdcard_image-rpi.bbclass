@@ -93,6 +93,9 @@ IMAGE_CMD_rpi-sdimg () {
 	dd if=$TMP_ROOTFS of=${SDIMG} ibs=1024 obs=512 count=$FS_SIZE_BLOCKS seek=$FS_OFFSET_SECT conv=notrunc
 	rm $TMP_ROOTFS
 
-	gzip -c ${WORKDIR}/sd.img > ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}-${IMAGEDATESTAMP}.img.gz
-	rm -f ${WORKDIR}/sd.img
+	# This does produce undesirable naming (i.e. *.rootfs.*), however we do get
+	# free configurable compression in return and the alternative (bootimg-style,
+	# with an additional task) is currently difficult to do in an external layer
+	# without making the task always run even if the image type is not selected.
+	mv ${WORKDIR}/sd.img ${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.rootfs.rpi-sdimg
 }
