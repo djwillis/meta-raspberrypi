@@ -107,9 +107,11 @@ ROOTFS_POSTPROCESS_COMMAND += " rpi_generate_sysctl_config ; "
 
 rpi_generate_sysctl_config() {
 	# systemd sysctl config
-	echo "vm.min_free_kbytes = 8192" > ${IMAGE_ROOTFS}${sysconfdir}/sysctl.d/rpi-vm.conf
+	test -d ${IMAGE_ROOTFS}${sysconfdir}/sysctl.d && \
+		echo "vm.min_free_kbytes = 8192" > ${IMAGE_ROOTFS}${sysconfdir}/sysctl.d/rpi-vm.conf
 
 	# sysv sysctl config
-	test -e ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf && sed -e "/vm.min_free_kbytes/d" -i ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf
+	test -e ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf && \
+		sed -e "/vm.min_free_kbytes/d" -i ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf
 	echo -e "\nvm.min_free_kbytes = 8192" >> ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf
 }
