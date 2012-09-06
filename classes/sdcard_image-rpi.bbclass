@@ -111,7 +111,7 @@ rpi_generate_sysctl_config() {
 		echo "vm.min_free_kbytes = 8192" > ${IMAGE_ROOTFS}${sysconfdir}/sysctl.d/rpi-vm.conf
 
 	# sysv sysctl config
-	IMAGE_SYSCTL_CONF = "${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf"
+	IMAGE_SYSCTL_CONF="${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf"
 	test -e ${IMAGE_ROOTFS}${sysconfdir}/sysctl.conf && \
 		sed -e "/vm.min_free_kbytes/d" -i ${IMAGE_SYSCTL_CONF}
 	echo "" >> ${IMAGE_SYSCTL_CONF} && echo "vm.min_free_kbytes = 8192" >> ${IMAGE_SYSCTL_CONF}
