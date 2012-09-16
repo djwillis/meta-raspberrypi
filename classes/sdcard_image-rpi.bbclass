@@ -92,9 +92,9 @@ IMAGE_CMD_rpi-sdimg () {
 			;;
 	esac
 
-	# To do
-	# Copy here a cmdline.txt file generated taking into consideration the partition type
-	# of the rootfs
+	# TODO
+	# Adjust cmdline.txt to reflect the rootfs partition type
+	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/cmdline.txt ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/bootcode.bin ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/loader.bin ::
 	mcopy -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin ::kernel.img
