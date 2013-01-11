@@ -1,2 +1,4 @@
 # RaspberryPi BSP default versions
+RPIFW_SRCREV ?= "0ac68cce44d4550c251172e8524100090e8211fa"
+RPIFW_DATE ?= "20130107"
 
