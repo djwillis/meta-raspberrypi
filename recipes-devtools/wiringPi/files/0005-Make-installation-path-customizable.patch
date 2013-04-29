@@ -1,0 +1,66 @@
+From 6196abf9e281e559514fa33812165040ee4decc9 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 13:22:47 -0600
+Subject: Make installation path customizable.
+
+Also use install instead of mkdir and cp. That's what it's for.
+Also, use ../wiringPi for library and include path.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ gpio/Makefile | 26 ++++++++++++++------------
+ 1 file changed, 14 insertions(+), 12 deletions(-)
+
+diff --git a/gpio/Makefile b/gpio/Makefile
+index a043962..b1539d9 100644
+--- a/gpio/Makefile
++++ b/gpio/Makefile
+@@ -23,13 +23,16 @@
+ #################################################################################
+ 
+ 
++DESTDIR?=/usr
++PREFIX?=/local
++
+ #DEBUG	= -g -O0
+-DEBUG	= -O2
+-CC	= gcc
+-INCLUDE	= -I/usr/local/include
+-CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
++DEBUG	?= -O2
++CC	?= gcc
++INCLUDE	?= -I../wiringPi
++CFLAGS	?= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
+ 
+-LDFLAGS	= -L/usr/local/lib
++LDFLAGS	?= -L../wiringPi
+ LIBS    = -lwiringPi -lpthread -lm
+ 
+ # May not need to  alter anything below this line
+@@ -61,17 +64,16 @@ tags:	$(SRC)
+ .PHONEY:	install
+ install:
+ 	@echo "[Install]"
+-	@cp gpio /usr/local/bin
+-	@chown root.root /usr/local/bin/gpio
+-	@chmod 4755 /usr/local/bin/gpio
+-	@mkdir -p /usr/local/man/man1
+-	@cp gpio.1 /usr/local/man/man1
++	@install -d $(DESTDIR)$(PREFIX)/bin
++	@install -m 4755 -o root -g root gpio $(DESTDIR)$(PREFIX)/bin
++	@install -d $(DESTDIR)$(PREFIX)/man/man1
++	@install -m 644 -o root -g root gpio.1 $(DESTDIR)$(PREFIX)/man/man1
+ 
+ .PHONEY:	uninstall
+ uninstall:
+ 	@echo "[UnInstall]"
+-	@rm -f /usr/local/bin/gpio
+-	@rm -f /usr/local/man/man1/gpio.1
++	@rm -f $(DESTDIR)$(PREFIX)/bin/gpio
++	@rm -f $(DESTDIR)$(PREFIX)/man/man1/gpio.1
+ 
+ .PHONEY:	depend
+ depend:
+-- 
+1.8.1.4
+

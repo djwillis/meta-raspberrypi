@@ -1,0 +1,32 @@
+From 036a62a021115088a78c766203b3c6ed94eefa7b Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 13:43:15 -0600
+Subject: Use local wiringPi libary and include path.
+
+.. in examples build.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ examples/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/examples/Makefile b/examples/Makefile
+index defd510..b84f3de 100644
+--- a/examples/Makefile
++++ b/examples/Makefile
+@@ -26,10 +26,10 @@
+ #DEBUG	= -g -O0
+ DEBUG	= -O3
+ CC	= gcc
+-INCLUDE	= -I/usr/local/include
++INCLUDE	= -I../wiringPi
+ CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
+ 
+-LDFLAGS	= -L/usr/local/lib
++LDFLAGS	= -L../wiringPi
+ LDLIBS    = -lwiringPi -lpthread -lm
+ 
+ # Should not alter anything below this line
+-- 
+1.8.1.4
+

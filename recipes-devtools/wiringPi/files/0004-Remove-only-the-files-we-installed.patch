@@ -1,0 +1,39 @@
+From 5d9d4d6f52863fbb4116462772361680ac490b09 Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 12:56:40 -0600
+Subject: Remove only the files we installed.
+
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ wiringPi/Makefile | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/wiringPi/Makefile b/wiringPi/Makefile
+index e8f1658..1d40c98 100644
+--- a/wiringPi/Makefile
++++ b/wiringPi/Makefile
+@@ -107,7 +107,7 @@ install:	$(DYNAMIC)
+ 	@install -m 0644 wiringPiI2C.h		$(INCLUDE_DIR)
+ 	@install -m 0755 $(DYNAMIC)		$(LIB_DIR)
+ 	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(BASE_NAME).so
+-	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(basename $(DYNAMIC))
++	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(BASE_NAME).so.$(DYN_VERS_MAJ)
+ 	@ldconfig
+ 
+ .PHONEY:	install-static
+@@ -129,7 +129,10 @@ uninstall:
+ 	@rm -f $(INCLUDE_DIR)/lcd.h
+ 	@rm -f $(INCLUDE_DIR)/wiringPiSPI.h
+ 	@rm -f $(INCLUDE_DIR)/wiringPiI2C.h
+-	@rm -f $(LIB_DIR)/$(BASE_NAME).*
++	@rm -f $(LIB_DIR)/$(STATIC)
++	@rm -f $(LIB_DIR)/$(DYNAMIC)
++	@rm -f $(LIB_DIR)/$(BASE_NAME).so
++	@rm -f $(LIB_DIR)/$(BASE_NAME).so.$(DYN_VERS_MAJ)
+ 	@ldconfig
+ 
+ 
+-- 
+1.8.1.4
+

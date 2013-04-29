@@ -1,0 +1,88 @@
+From 9d212414e6eae36f29de404aa75d716a4c66773c Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 12:52:45 -0600
+Subject: Use the new configuration variables.
+
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ wiringPi/Makefile | 56 +++++++++++++++++++++++++++----------------------------
+ 1 file changed, 28 insertions(+), 28 deletions(-)
+
+diff --git a/wiringPi/Makefile b/wiringPi/Makefile
+index 6a0e567..e8f1658 100644
+--- a/wiringPi/Makefile
++++ b/wiringPi/Makefile
+@@ -92,22 +92,22 @@ tags:	$(SRC)
+ .PHONEY:	install
+ install:	$(DYNAMIC)
+ 	@echo "[Install]"
+-	@install -m 0755 -d			$(DESTDIR)$(PREFIX)/lib
+-	@install -m 0755 -d			$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 wiringPi.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 wiringSerial.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 wiringShift.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 gertboard.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 piNes.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 softPwm.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 softServo.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 softTone.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 lcd.h			$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 wiringPiSPI.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0644 wiringPiI2C.h		$(DESTDIR)$(PREFIX)/include
+-	@install -m 0755 libwiringPi.so.$(VERSION)		  $(DESTDIR)$(PREFIX)/lib
+-	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPi.so.$(VERSION) $(DESTDIR)/lib/libwiringPi.so
+-	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPi.so.$(VERSION) $(DESTDIR)/lib/libwiringPi.so.1
++	@install -m 0755 -d			$(LIB_DIR)
++	@install -m 0755 -d			$(INCLUDE_DIR)
++	@install -m 0644 wiringPi.h		$(INCLUDE_DIR)
++	@install -m 0644 wiringSerial.h		$(INCLUDE_DIR)
++	@install -m 0644 wiringShift.h		$(INCLUDE_DIR)
++	@install -m 0644 gertboard.h		$(INCLUDE_DIR)
++	@install -m 0644 piNes.h		$(INCLUDE_DIR)
++	@install -m 0644 softPwm.h		$(INCLUDE_DIR)
++	@install -m 0644 softServo.h		$(INCLUDE_DIR)
++	@install -m 0644 softTone.h		$(INCLUDE_DIR)
++	@install -m 0644 lcd.h			$(INCLUDE_DIR)
++	@install -m 0644 wiringPiSPI.h		$(INCLUDE_DIR)
++	@install -m 0644 wiringPiI2C.h		$(INCLUDE_DIR)
++	@install -m 0755 $(DYNAMIC)		$(LIB_DIR)
++	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(BASE_NAME).so
++	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(basename $(DYNAMIC))
+ 	@ldconfig
+ 
+ .PHONEY:	install-static
+@@ -118,18 +118,18 @@ install-static:	$(STATIC)
+ .PHONEY:	uninstall
+ uninstall:
+ 	@echo "[UnInstall]"
+-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPi.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringSerial.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringShift.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/gertboard.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/piNes.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/softPwm.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/softServo.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/softTone.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/lcd.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPiSPI.h
+-	@rm -f $(DESTDIR)$(PREFIX)/include/wiringPiI2C.h
+-	@rm -f $(DESTDIR)$(PREFIX)/lib/libwiringPi.*
++	@rm -f $(INCLUDE_DIR)/wiringPi.h
++	@rm -f $(INCLUDE_DIR)/wiringSerial.h
++	@rm -f $(INCLUDE_DIR)/wiringShift.h
++	@rm -f $(INCLUDE_DIR)/gertboard.h
++	@rm -f $(INCLUDE_DIR)/piNes.h
++	@rm -f $(INCLUDE_DIR)/softPwm.h
++	@rm -f $(INCLUDE_DIR)/softServo.h
++	@rm -f $(INCLUDE_DIR)/softTone.h
++	@rm -f $(INCLUDE_DIR)/lcd.h
++	@rm -f $(INCLUDE_DIR)/wiringPiSPI.h
++	@rm -f $(INCLUDE_DIR)/wiringPiI2C.h
++	@rm -f $(LIB_DIR)/$(BASE_NAME).*
+ 	@ldconfig
+ 
+ 
+-- 
+1.8.1.4
+

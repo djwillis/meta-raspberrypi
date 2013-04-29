@@ -1,0 +1,51 @@
+From acf2797af32c4e31ca44fff7415a75a8417cb89f Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 13:36:05 -0600
+Subject: Make make build libwiringPi.so, not .so.$VERSION
+
+This makes it possible to link against it before it gets installed.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ wiringPi/Makefile | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/wiringPi/Makefile b/wiringPi/Makefile
+index 1d40c98..e859511 100644
+--- a/wiringPi/Makefile
++++ b/wiringPi/Makefile
+@@ -70,11 +70,11 @@ $(STATIC):	$(OBJ)
+ 
+ $(DYNAMIC):	$(OBJ)
+ 	@echo "[Link (Dynamic)]"
+-	@$(CC) -shared -Wl,-soname,libwiringPi.so.1 -o libwiringPi.so.1.0 -lpthread $(OBJ)
++	@$(CC) -shared -Wl,-soname,$(BASE_NAME).so.$(DYN_VERS_MAJ) -o $(BASE_NAME).so -lpthread $(OBJ)
+ 
+ i2c:	$(OBJ) $(OBJ_I2C)
+ 	@echo "[Link (Dynamic + I2C)]"
+-	@$(CC) -shared -Wl,-soname,libwiringPi.so.1 -o libwiringPi.so.1.0 -lpthread $(OBJ) $(OBJ_I2C)
++	@$(CC) -shared -Wl,-soname,$(BASE_NAME).so.$(DYN_VERS_MAJ) -o $(BASE_NAME).so -lpthread $(OBJ) $(OBJ_I2C)
+ 
+ .c.o:
+ 	@echo [Compile] $<
+@@ -82,7 +82,7 @@ i2c:	$(OBJ) $(OBJ_I2C)
+ 
+ .PHONEY:	clean
+ clean:
+-	rm -f $(OBJ) $(OBJ_I2C) *~ core tags Makefile.bak libwiringPi.*
++	rm -f $(OBJ) $(OBJ_I2C) *~ core tags Makefile.bak $(BASE_NAME).so* $(BASE_NAME).a
+ 
+ .PHONEY:	tags
+ tags:	$(SRC)
+@@ -105,7 +105,7 @@ install:	$(DYNAMIC)
+ 	@install -m 0644 lcd.h			$(INCLUDE_DIR)
+ 	@install -m 0644 wiringPiSPI.h		$(INCLUDE_DIR)
+ 	@install -m 0644 wiringPiI2C.h		$(INCLUDE_DIR)
+-	@install -m 0755 $(DYNAMIC)		$(LIB_DIR)
++	@install -m 0755 $(BASE_NAME).so	$(LIB_DIR)/$(DYNAMIC)
+ 	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(BASE_NAME).so
+ 	@ln -sf $(DYNAMIC)			$(LIB_DIR)/$(BASE_NAME).so.$(DYN_VERS_MAJ)
+ 	@ldconfig
+-- 
+1.8.1.4
+

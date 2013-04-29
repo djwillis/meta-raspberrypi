@@ -1,0 +1,30 @@
+From 67d0f193dd83c54e60eb20ca679da2b04b79cc2f Mon Sep 17 00:00:00 2001
+From: Dan McGregor <dan.mcgregor@usask.ca>
+Date: Mon, 29 Apr 2013 12:42:52 -0600
+Subject: Make install-static do what is conventional
+
+Static libraries are conventionally installed as 0644, not 0755.
+Also, reference the variable defined at the top of the Makefile,
+instead of the static string.
+
+Signed-off-by: Dan McGregor <dan.mcgregor@usask.ca>
+---
+ wiringPi/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/wiringPi/Makefile b/wiringPi/Makefile
+index c6a4555..7ebbbfd 100644
+--- a/wiringPi/Makefile
++++ b/wiringPi/Makefile
+@@ -110,7 +110,7 @@ install:	$(DYNAMIC)
+ .PHONEY:	install-static
+ install-static:	$(STATIC)
+ 	@echo "[Install Static]"
+-	@install -m 0755 libwiringPi.a		$(DESTDIR)$(PREFIX)/lib
++	@install -m 0644 $(STATIC)		$(LIB_DIR)
+ 
+ .PHONEY:	uninstall
+ uninstall:
+-- 
+1.8.1.4
+
