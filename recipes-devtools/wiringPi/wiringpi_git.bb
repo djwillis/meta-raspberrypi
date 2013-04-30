@@ -11,13 +11,7 @@ S = "${WORKDIR}/git"
 
 SRC_URI = "\
           git://git.drogon.net/wiringPi \
-		  file://0001-Make-install-static-do-what-is-conventional.patch \
-		  file://0002-Add-finer-grained-control-of-build.patch \
-		  file://0003-Use-the-new-configuration-variables.patch \
-		  file://0004-Remove-only-the-files-we-installed.patch \
-		  file://0005-Make-installation-path-customizable.patch \
-		  file://0006-Make-make-build-libwiringPi.so-not-.so.-VERSION.patch \
-		  file://0007-Use-local-wiringPi-libary-and-include-path.patch \
+		  file://Makefiles-install.patch \
           "
 
 COMPATIBLE_MACHINE = "raspberrypi"
