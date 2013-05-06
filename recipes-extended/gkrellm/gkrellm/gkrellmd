@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+
+APP_PATH="/usr/sbin"
+MONITOR_APP="gkrellmd"
+
+case "$1" in
+
+  start)
+    $APP_PATH/$MONITOR_APP > /dev/null 2>&1
+    ;;
+
+  stop)
+    killall $MONITOR_APP
+    ;;
+
+  restart)
+    killall $MONITOR_APP
+    sleep 3
+    $APP_PATH/$MONITOR_APP > /dev/null 2>&1
+    ;;
+esac
