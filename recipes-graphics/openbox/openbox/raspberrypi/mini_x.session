@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# start openbox as stand-alone wm
+
+exec openbox-session
