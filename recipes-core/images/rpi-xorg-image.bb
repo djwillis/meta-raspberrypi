@@ -25,7 +25,8 @@ IMAGE_INSTALL = "\
     bash \
     nano \
     zram \
-    gkrellm-daemon \
+    gkrellm \
+    gkrellm-client \
     cpufrequtils \
     connman-tests \
     gst-meta-video \
