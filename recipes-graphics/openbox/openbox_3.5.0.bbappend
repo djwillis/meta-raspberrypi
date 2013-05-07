@@ -6,11 +6,11 @@ PRINC := "${@int(PRINC) + 5}"
 THISDIR := "${@os.path.dirname(bb.data.getVar('FILE', d, True))}"
 FILESPATH =. "${@base_set_filespath(["${THISDIR}/${PN}"], d)}:"
 
-SRC_URI_append_raspberrypi = " file://mini_x.session "
+SRC_URI_append = " file://mini_x.session "
 
-do_install_append_raspberrypi () {
+do_install_append () {
 	install -d ${D}/${sysconfdir}/mini_x
 	install -m 0755 ${WORKDIR}//mini_x.session ${D}/${sysconfdir}/mini_x/session
 }
 
-FILES_${PN}_raspberrypi += "${sysconfdir}/mini_x/*"
+FILES_${PN}-config += "${sysconfdir}/mini_x/*"
