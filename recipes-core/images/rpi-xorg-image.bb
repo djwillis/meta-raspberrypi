@@ -22,6 +22,7 @@ IMAGE_INSTALL = "\
     xmodmap \
     xrdb \
     setxkbmap \
+    userland \
     bash \
     nano \
     zram \

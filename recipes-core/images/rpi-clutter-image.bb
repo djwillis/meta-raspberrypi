@@ -10,6 +10,7 @@ IMAGE_INSTALL = "\
     ${CORE_IMAGE_EXTRA_INSTALL} \
     packagegroup-core-clutter-core \
     nano \
+    userland \
     cpufrequtils \
     connman-tests \
 "
