@@ -17,6 +17,9 @@ S = "${WORKDIR}/git/boot"
 
 PR = "r3"
 
+# recommended values are 1 (analog) or 2 (hdmi)
+DEFAULT_AUDIO_OUT ?= "1"
+
 addtask deploy before do_package after do_install
 
 do_deploy() {
@@ -32,6 +35,10 @@ do_deploy() {
 	done
 	# Add stamp in deploy directory
 	touch ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/${PN}-${PV}.stamp
+
+	# set a specific audio output for alsa (auto is known to be problematic)
+	sed -i -e "s|#hdmi_drive=2|hdmi_drive=${DEFAULT_AUDIO_OUT}|" \
+		${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/config.txt
 }
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
