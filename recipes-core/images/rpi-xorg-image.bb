@@ -5,6 +5,8 @@ DESCRIPTION = "A custom image based on core-image and x11."
 IMAGE_FEATURES += "package-management ssh-server-dropbear splash \
     x11-base hwcodecs"
 
+DEFAULT_AUDIO_OUT = "1"
+
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${CORE_IMAGE_EXTRA_INSTALL} \
@@ -32,9 +34,14 @@ IMAGE_INSTALL = "\
     connman-tests \
     gst-meta-video \
     gst-meta-audio \
+    alsa-utils-speakertest \
+    mpd \
     mc \
     vim \
     file \
+    ntp \
+    tzdata \
+    ntpdate \
     usbutils \
     sysfsutils \
     imagemagick \
