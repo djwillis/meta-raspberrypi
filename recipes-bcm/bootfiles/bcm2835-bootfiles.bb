@@ -17,8 +17,8 @@ S = "${WORKDIR}/git/boot"
 
 PR = "r3"
 
-# recommended values are 1 (analog) or 2 (hdmi)
-DEFAULT_AUDIO_OUT ?= "1"
+# recommended values are 1 (DVI only) or 2 (hdmi with audio)
+DEFAULT_AUDIO_OUT ?= "2"
 
 addtask deploy before do_package after do_install
 
