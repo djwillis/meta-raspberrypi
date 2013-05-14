@@ -1,11 +1,11 @@
-# FIXME: We may need to disable EGL and GL ES2
+# FIXME: We may need to disable EGL, GL ES1 and GL ES2
 python __anonymous () {
     import re
 
     # Remove egl gles1 and gles2 configure options
     extra_oeconf = d.getVar('EXTRA_OECONF', True).split()
-    take_out = ['--enable-egl', '--enable-gles2']
-    put_in = ['--disable-egl', '--disable-gles2']
+    take_out = ['--enable-egl', '--enable-gles1', '--enable-gles2']
+    put_in = ['--disable-egl', '--disable-gles1', '--disable-gles2']
     pattern = re.compile("--with-egl-platforms")
     new_extra_oeconf = []
     for i in extra_oeconf:
@@ -16,9 +16,9 @@ python __anonymous () {
 
     d.setVar('EXTRA_OECONF', ' '.join(new_extra_oeconf))
 
-    # Remove items from provides
+    # Remove itens from provides
     provides = d.getVar('PROVIDES', True).split()
-    take_out = ['virtual/libgles2', 'virtual/egl']
+    take_out = ['virtual/libgles1', 'virtual/libgles2', 'virtual/egl']
     new_provides = []
     for i in provides:
         if i not in take_out:
