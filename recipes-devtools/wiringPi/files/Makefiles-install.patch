@@ -52,8 +52,8 @@ index a043962..b1539d9 100644
 -	@cp gpio.1 /usr/local/man/man1
 +	@install -d $(DESTDIR)$(PREFIX)/bin
 +	@install -m 4755 -o root -g root gpio $(DESTDIR)$(PREFIX)/bin
-+	@install -d $(DESTDIR)$(PREFIX)/man/man1
-+	@install -m 644 -o root -g root gpio.1 $(DESTDIR)$(PREFIX)/man/man1
++	@install -d $(DESTDIR)$(PREFIX)/share/man/man1
++	@install -m 644 -o root -g root gpio.1 $(DESTDIR)$(PREFIX)/share/man/man1
  
  .PHONEY:	uninstall
  uninstall:
@@ -61,7 +61,7 @@ index a043962..b1539d9 100644
 -	@rm -f /usr/local/bin/gpio
 -	@rm -f /usr/local/man/man1/gpio.1
 +	@rm -f $(DESTDIR)$(PREFIX)/bin/gpio
-+	@rm -f $(DESTDIR)$(PREFIX)/man/man1/gpio.1
++	@rm -f $(DESTDIR)$(PREFIX)/share/man/man1/gpio.1
  
  .PHONEY:	depend
  depend:
