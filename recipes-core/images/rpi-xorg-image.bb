@@ -21,6 +21,7 @@ IMAGE_INSTALL = "\
     openbox-theme-bear2 \
     openbox-theme-clearlooks \
     openbox-theme-artwiz-boxed \
+    obconf \
     xmodmap \
     xrdb \
     setxkbmap \
