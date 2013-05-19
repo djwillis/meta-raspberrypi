@@ -5,7 +5,13 @@ DESCRIPTION = "A custom image based on core-image and x11."
 IMAGE_FEATURES += "package-management ssh-server-dropbear splash \
     x11-base hwcodecs"
 
-DEFAULT_AUDIO_OUT = "1"
+DEFAULT_TIMEZONE = "PST8PDT"
+
+# possible values are 1 (DVI only) or 2 (hdmi with audio)
+DEFAULT_AUDIO_OUT = "2"
+
+# possible values are internal or external
+CUSTOM_FEED_CONFIG = "internal"
 
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
