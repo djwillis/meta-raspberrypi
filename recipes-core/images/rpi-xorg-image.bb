@@ -5,13 +5,14 @@ DESCRIPTION = "A custom image based on core-image and x11."
 IMAGE_FEATURES += "package-management ssh-server-dropbear splash \
     x11-base hwcodecs"
 
-DEFAULT_TIMEZONE = "PST8PDT"
+# you can override the following three parameters in your local.conf
+DEFAULT_TIMEZONE ?= "Universal"
 
 # possible values are 1 (DVI only) or 2 (hdmi with audio)
-DEFAULT_AUDIO_OUT = "2"
+DEFAULT_AUDIO_OUT ?= "2"
 
 # possible values are internal or external
-CUSTOM_FEED_CONFIG = "internal"
+CUSTOM_FEED_CONFIG ?= "external"
 
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
@@ -57,6 +58,7 @@ IMAGE_INSTALL = "\
     leafpad \
     midori \
     pcmanfm \
+    xfmpc \
 "
 
 # core-image bbclass provides core-boot and base packages
