@@ -17,18 +17,15 @@ CUSTOM_FEED_CONFIG ?= "external"
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${CORE_IMAGE_EXTRA_INSTALL} \
+    ${EXTRA_TIMEZONES} \
     packagegroup-base-alsa \
     packagegroup-core-x11 \
     packagegroup-core-x11-base \
     xkbcomp \
     openbox \
-    openbox-config \
-    openbox-core \
-    openbox-lxde \
-    openbox-theme-bear2 \
-    openbox-theme-clearlooks \
-    obconf \
+    ${WINDOW_MANAGER} \
     tint2 \
+    ${DESKTOP_APPS} \
     xmodmap \
     xrdb \
     setxkbmap \
@@ -37,11 +34,8 @@ IMAGE_INSTALL = "\
     nano \
     zram \
     gkrellm \
-    gkrellm-client \
     cpufrequtils \
     connman-tests \
-    gst-meta-video \
-    gst-meta-audio \
     alsa-utils-speakertest \
     mpd \
     mc \
@@ -52,14 +46,47 @@ IMAGE_INSTALL = "\
     ntpdate \
     usbutils \
     sysfsutils \
-    imagemagick \
-    xchat \
-    vala-terminal \
-    leafpad \
-    midori \
-    pcmanfm \
-    xfmpc \
 "
 
 # core-image bbclass provides core-boot and base packages
 inherit core-image
+
+DESKTOP_APPS = " \
+    imagemagick \
+    xchat \
+    vala-terminal \
+    leafpad \
+    leafpad-stock-icons \
+    midori \
+    pcmanfm \
+    xfmpc \
+    gkrellm-client \
+    gst-meta-video \
+    gst-meta-audio \
+"
+
+WINDOW_MANAGER = " \
+    openbox \
+    openbox-config \
+    openbox-core \
+    openbox-lxde \
+    openbox-theme-bear2 \
+    openbox-theme-clearlooks \
+    gtk-theme-clearlooks \
+    obconf \
+"
+
+EXTRA_TIMEZONES = " \
+    tzdata-africa \
+    tzdata-americas \
+    tzdata-antarctica \
+    tzdata-arctic \
+    tzdata-asia \
+    tzdata-atlantic \
+    tzdata-australia \
+    tzdata-europe \
+    tzdata-misc \
+    tzdata-pacific \
+    tzdata-posix \
+    tzdata-right \
+"
