@@ -46,6 +46,7 @@ IMAGE_INSTALL = "\
     ntpdate \
     usbutils \
     sysfsutils \
+    bluez-hcidump \
 "
 
 # core-image bbclass provides core-boot and base packages

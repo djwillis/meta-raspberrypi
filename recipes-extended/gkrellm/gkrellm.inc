@@ -58,7 +58,7 @@ CONFFILES_${PN} = "${sysconfdir}/gkrellmd.conf"
 INITSCRIPT_NAME = "gkrellmd"
 INITSCRIPT_PARAMS = "start 26 2 3 4 5 . stop 21 0 1 6 ."
 
-pkg_postinst_ntpdate() {
+pkg_postinst_gkrellm() {
 if test "x$D" != "x"; then
     exit 1
 else
