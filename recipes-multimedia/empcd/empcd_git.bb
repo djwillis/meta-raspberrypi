@@ -10,11 +10,11 @@ inherit update-rc.d
 
 SRCREV = "${AUTOREV}"
 PV = "2013+gitr${SRCPV}"
-PR = "r0"
+PR = "r1"
 BRANCH = "meta-raspberrypi"
 
 SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
-           file"//empcd.init"
+           file://empcd.init"
 
 S = "${WORKDIR}/git"
 
