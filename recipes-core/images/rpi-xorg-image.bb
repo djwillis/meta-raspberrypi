@@ -17,18 +17,16 @@ CUSTOM_FEED_CONFIG ?= "external"
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${CORE_IMAGE_EXTRA_INSTALL} \
-    ${EXTRA_TIMEZONES} \
     packagegroup-base-alsa \
     packagegroup-core-x11 \
     packagegroup-core-x11-base \
     xkbcomp \
-    openbox \
-    ${WINDOW_MANAGER} \
-    tint2 \
-    ${DESKTOP_APPS} \
     xmodmap \
     xrdb \
     setxkbmap \
+    ${EXTRA_TIMEZONES} \
+    ${WINDOW_MANAGER} \
+    ${DESKTOP_APPS} \
     userland \
     bash \
     nano \
@@ -38,15 +36,20 @@ IMAGE_INSTALL = "\
     connman-tests \
     alsa-utils-speakertest \
     mpd \
+    empcd \
     mc \
     vim \
     file \
-    ntp \
     tzdata \
+    ntp \
     ntpdate \
+    ntp-utils \
+    perl-module-socket \
+    perl-module-getopt-std \
     usbutils \
     sysfsutils \
     bluez-hcidump \
+    bluez4-agent \
 "
 
 # core-image bbclass provides core-boot and base packages
@@ -73,8 +76,14 @@ WINDOW_MANAGER = " \
     openbox-lxde \
     openbox-theme-bear2 \
     openbox-theme-clearlooks \
+    openbox-theme-onyx \
     gtk-theme-clearlooks \
+    gtk-theme-crux \
+    gtk-theme-mist \
+    gnome-icon-theme \
+    hicolor-icon-theme \
     obconf \
+    tint2 \
 "
 
 EXTRA_TIMEZONES = " \
