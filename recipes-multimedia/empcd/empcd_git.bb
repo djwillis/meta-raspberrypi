@@ -13,7 +13,8 @@ PV = "2013+gitr${SRCPV}"
 PR = "r0"
 BRANCH = "meta-raspberrypi"
 
-SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH}"
+SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
+           file"//empcd.init"
 
 S = "${WORKDIR}/git"
 
@@ -23,7 +24,7 @@ do_install() {
     oe_runmake install DESTDIR=${D}
 
     install -d ${D}${sysconfdir}/init.d
-    install -m 0755 ${S}/debian/empcd.init ${D}${sysconfdir}/init.d/empcd
+    install -m 0755 ${WORKDIR}/empcd.init ${D}${sysconfdir}/init.d/empcd
     install -m 0755 ${S}/doc/empcd.conf ${D}${sysconfdir}/
 }
 
