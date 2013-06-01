@@ -1,5 +1,5 @@
-DESCRIPTION = ""
-HOMEPAGE = ""
+DESCRIPTION = "EMPCd is the Event Music Player Client daemon"
+HOMEPAGE = "http://unfix.org/projects/empcd/"
 
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0b7766af385b099ac9437fa883a2d279"
@@ -14,7 +14,9 @@ PR = "r1"
 BRANCH = "meta-raspberrypi"
 
 SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
-           file://empcd.init"
+           file://empcd.init \
+           file://empcd-ipazzport.conf \
+"
 
 S = "${WORKDIR}/git"
 
@@ -25,7 +27,7 @@ do_install() {
 
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/empcd.init ${D}${sysconfdir}/init.d/empcd
-    install -m 0755 ${S}/doc/empcd.conf ${D}${sysconfdir}/
+    install -m 0755 ${WORKDIR}/empcd-ipazzport.conf ${D}${sysconfdir}/empcd.conf
 }
 
 INITSCRIPT_NAME = "empcd"
