@@ -17,14 +17,8 @@ CUSTOM_FEED_CONFIG ?= "external"
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${CORE_IMAGE_EXTRA_INSTALL} \
-    packagegroup-base-alsa \
-    packagegroup-core-x11 \
-    packagegroup-core-x11-base \
-    xkbcomp \
-    xmodmap \
-    xrdb \
-    setxkbmap \
     ${EXTRA_TIMEZONES} \
+    ${XSERVER} \
     ${WINDOW_MANAGER} \
     ${DESKTOP_APPS} \
     userland \
@@ -34,6 +28,7 @@ IMAGE_INSTALL = "\
     gkrellm \
     cpufrequtils \
     connman-tests \
+    packagegroup-base-alsa \
     alsa-utils-speakertest \
     mpd \
     empcd \
@@ -54,6 +49,15 @@ IMAGE_INSTALL = "\
 
 # core-image bbclass provides core-boot and base packages
 inherit core-image
+
+XSERVER = " \
+    packagegroup-core-x11 \
+    packagegroup-core-x11-base \
+    xkbcomp \
+    xmodmap \
+    xrdb \
+    setxkbmap \
+"    
 
 DESKTOP_APPS = " \
     imagemagick \
@@ -80,7 +84,9 @@ WINDOW_MANAGER = " \
     gtk-theme-clearlooks \
     gtk-theme-crux \
     gtk-theme-mist \
+    clearlooks-theme-enable \
     gnome-icon-theme \
+    gnome-icon-theme-enable \
     hicolor-icon-theme \
     obconf \
     tint2 \
