@@ -36,7 +36,7 @@ INITSCRIPT_NAME_${PN}-agent = "bluetooth-agent"
 INITSCRIPT_PARAMS_${PN}-agent = "start 65 2 3 4 5 . stop 35 0 1 6 ."
 
 do_install_append() {
-  rm ${D}/usr/lib/gstreamer-0.10/libgstbluetooth.la
+  rm -f ${D}/usr/lib/gstreamer-0.10/libgstbluetooth.la
 
   install -d ${D}${sysconfdir}/init.d
   install -d ${D}${sysconfdir}/default
