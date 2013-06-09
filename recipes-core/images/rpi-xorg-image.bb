@@ -21,7 +21,8 @@ IMAGE_INSTALL = "\
     ${XSERVER} \
     ${WINDOW_MANAGER} \
     ${DESKTOP_APPS} \
-    userland \
+    vc-graphics-hardfp \
+    bcm2835-tests \
     bash \
     nano \
     zram \
@@ -61,6 +62,8 @@ XSERVER = " \
 
 DESKTOP_APPS = " \
     imagemagick \
+    feh \
+    mupdf \
     xchat \
     vala-terminal \
     leafpad \
