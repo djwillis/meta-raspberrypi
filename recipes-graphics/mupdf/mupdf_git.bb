@@ -17,10 +17,6 @@ inherit cmake
 
 S = "${WORKDIR}/git"
 
-# Do an out-of-tree build
-#OECMAKE_SOURCEPATH = "${S}"
-#OECMAKE_BUILDPATH = "${WORKDIR}/build-${TARGET_ARCH}"
-
 # mupdf crashes when built with -ggdb3
 # http://bugs.ghostscript.com/show_bug.cgi?id=691578
 FULL_OPTIMIZATION := "${@oe_filter_out('-ggdb3', '${FULL_OPTIMIZATION}', d)}"
@@ -38,8 +34,12 @@ do_compile() {
     unset CFLAGS LDFLAGS
     export PKG_CONFIG_PATH=${STAGING_LIBDIR_NATIVE}/pkgconfig
     oe_runmake build=release build/release
-    oe_runmake build=release build/release/cmapdump LD=${BUILD_CC} LDFLAGS="-L${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE}" CC=${BUILD_CC}
-    oe_runmake build=release build/release/fontdump LD=${BUILD_CC} LDFLAGS="-L${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE}" CC=${BUILD_CC}
+    oe_runmake build=release build/release/cmapdump LD=${BUILD_CC} \
+        LDFLAGS="-L${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE}" \
+        CC=${BUILD_CC}
+    oe_runmake build=release build/release/fontdump LD=${BUILD_CC} \
+        LDFLAGS="-L${STAGING_LIBDIR_NATIVE} -Wl,-rpath,${STAGING_LIBDIR_NATIVE}" \
+        CC=${BUILD_CC}
 
     export PKG_CONFIG_PATH=${STAGING_LIBDIR}/pkgconfig
     sed -i -e "s|cflags libopenjpeg|cflags libopenjpeg1|" ${S}/Makerules
@@ -47,7 +47,8 @@ do_compile() {
     # cross-compilation flags through Makerules file
     echo "CFLAGS += ${CFLAGS}" >> ${S}/Makerules
     echo "LDFLAGS += ${LDFLAGS}" >> ${S}/Makerules
-    oe_runmake build=release LD="${CC}" XCFLAGS="-I${STAGING_INCDIR}" XLIBS="-L${STAGING_LIBDIR} -Wl,-rpath-link,${STAGING_LIBDIR}" 
+    oe_runmake build=release LD="${CC}" XCFLAGS="-I${STAGING_INCDIR}" \
+        XLIBS="-L${STAGING_LIBDIR} -Wl,-rpath-link,${STAGING_LIBDIR}" 
 }
 
 do_install() {
