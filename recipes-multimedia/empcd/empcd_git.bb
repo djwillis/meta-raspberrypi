@@ -22,6 +22,8 @@ S = "${WORKDIR}/git"
 
 EXTRA_OEMAKE = "'CC=${CC}' 'CXX=${CXX}'"
 
+LDFLAGS_append = "${@bb.utils.contains('TUNE_FEATURES', 'vfp', '-mfloat-abi=hard', '', d)}"
+
 do_install() {
     oe_runmake install DESTDIR=${D}
 
