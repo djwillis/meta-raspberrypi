@@ -82,7 +82,7 @@
 <menu id="apps-graphics-menu" label="Graphics">
   <item label="ImageMagick viewer">
     <action name="Execute">
-      <command>display</command>
+      <command>xterm -iconic -e display</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
