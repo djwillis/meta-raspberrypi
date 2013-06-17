@@ -14,6 +14,9 @@ DEFAULT_AUDIO_OUT ?= "2"
 # possible values are internal or external
 CUSTOM_FEED_CONFIG ?= "external"
 
+# didn't work, so I have to make my own implementation later...
+#ROOTLESS_X = "1"
+
 IMAGE_INSTALL = "\
     ${CORE_IMAGE_BASE_INSTALL} \
     ${CORE_IMAGE_EXTRA_INSTALL} \
@@ -22,13 +25,14 @@ IMAGE_INSTALL = "\
     ${WINDOW_MANAGER} \
     ${DESKTOP_APPS} \
     vc-graphics-hardfp \
+    linux-firmware \
     bcm2835-tests \
     bash \
     nano \
     zram \
     gkrellm \
     cpufrequtils \
-    connman-tests \
+    python-shell \
     packagegroup-base-alsa \
     alsa-utils-speakertest \
     mpd \
@@ -46,6 +50,7 @@ IMAGE_INSTALL = "\
     sysfsutils \
     bluez-hcidump \
     bluez4-agent \
+    wpa-supplicant \
 "
 
 # core-image bbclass provides core-boot and base packages
