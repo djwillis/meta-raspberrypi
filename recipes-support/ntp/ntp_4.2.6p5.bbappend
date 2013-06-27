@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Don't forget to bump PRINC if you update the extra files.
-PRINC := "${@int(PRINC) + 1}"
+PRINC := "${@int(PRINC) + 2}"
 
 inherit useradd
 
@@ -10,8 +10,8 @@ do_configure_prepend() {
     sed -i -e 's|NTPSERVERS=""|NTPSERVERS="pool.ntp.org"|' \
         ${WORKDIR}/ntpdate.default
 
-    sed -i -e "s|startdaemon -g|startdaemon -g -u ntp:ntp|g" \
-        ${WORKDIR}/ntpd
+#    sed -i -e "s|startdaemon -g|startdaemon -g -u ntp:ntp|g" \
+#        ${WORKDIR}/ntpd
 
     sed -i \
         -e "s|etc/ntp.drift|var/lib/ntp/ntp.drift|" \

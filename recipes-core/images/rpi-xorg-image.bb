@@ -30,6 +30,7 @@ IMAGE_INSTALL = "\
     bash \
     nano \
     zram \
+    rsync \
     gkrellm \
     cpufrequtils \
     python-shell \
@@ -74,6 +75,8 @@ DESKTOP_APPS = " \
     leafpad \
     leafpad-stock-icons \
     midori \
+    pidgin \
+    gnome-bluetooth \
     pcmanfm \
     xfmpc \
     gkrellm-client \

@@ -20,9 +20,7 @@ SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH}
 
 S = "${WORKDIR}/git"
 
-EXTRA_OEMAKE = "'CC=${CC}' 'CXX=${CXX}'"
-
-LDFLAGS_append = "${@bb.utils.contains('TUNE_FEATURES', 'vfp', '-mfloat-abi=hard', '', d)}"
+EXTRA_OEMAKE = "'CC=${CC}' 'CXX=${CXX}' SYSROOT=${STAGING_DIR_TARGET}"
 
 do_install() {
     oe_runmake install DESTDIR=${D}
