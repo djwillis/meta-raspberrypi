@@ -36,7 +36,9 @@ IMAGE_INSTALL = "\
     python-shell \
     packagegroup-base-alsa \
     alsa-utils-speakertest \
+    alsa-utils-amixer \
     mpd \
+    mpc \
     empcd \
     mc \
     vim \
@@ -49,6 +51,10 @@ IMAGE_INSTALL = "\
     perl-module-getopt-std \
     usbutils \
     sysfsutils \
+    lirc \
+    lirc-exec \
+    lirc-remotes \
+    lirc-x \
     bluez-hcidump \
     bluez4-agent \
     wpa-supplicant \
