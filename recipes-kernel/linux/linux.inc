@@ -113,6 +113,10 @@ do_configure_prepend() {
 	yes '' | oe_runmake oldconfig
 }
 
+PACKAGES =+ "linux-raspberrypi-firmware"
+RPROVIDES_${PN}-firmware = "linux-firmware"
+FILES_${PN}-firmware = "/lib/firmware/*"
+
 # Automatically depend on lzop-native if CONFIG_KERNEL_LZO is enabled
 python () {
     try:
