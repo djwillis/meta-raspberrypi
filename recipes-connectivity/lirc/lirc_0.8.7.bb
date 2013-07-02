@@ -18,7 +18,7 @@ RDEPENDS_lirc-exec = "lirc"
 RDEPENDS_lirc-nslu2example = "lirc lirc-exec"
 RRECOMMENDS_lirc = "lirc-exec"
 
-PR = "r0"
+PR = "r1"
 
 inherit autotools update-rc.d
 
@@ -26,6 +26,11 @@ SRC_URI_append = " file://lircd.init \
                    file://lircmd.init \
                    file://lircexec.init \
                  "
+
+SRC_URI_append_raspberrypi = " file://lircd.conf_ipazzport \
+                               file://lircrc_ipazzport \
+                             "
+
 SRC_URI_append_nslu2 = " file://lircd.conf_nslu2 \
                          file://lircrc_nslu2 \
                        "
@@ -54,6 +59,12 @@ do_install_append() {
     mkdir -p ${D}/run/lirc/
     mv ${D}/var/run/lirc ${D}/run/lirc/
     rm -rf ${D}/var
+}
+
+do_install_append_raspberrypi() {
+    install -d ${D}${sysconfdir}/lirc
+    install ${WORKDIR}/lircrc_ipazzport ${D}${sysconfdir}/lirc/lircrc
+    install ${WORKDIR}/lircd.conf_ipazzport ${D}${sysconfdir}/lirc/lircd.conf
 }
 
 do_install_append_nslu2() {

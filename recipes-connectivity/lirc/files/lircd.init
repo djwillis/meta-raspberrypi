@@ -7,12 +7,12 @@
 
 
 test -f /usr/sbin/lircd || exit 0
-test -f /etc/lircd.conf || exit 0
+test -f /etc/lirc/lircd.conf || exit 0
 
 case "$1" in
   start)
     echo -n "Starting lirc daemon: lircd"
-    start-stop-daemon --start --quiet --exec /usr/sbin/lircd -- --device=/dev/lirc
+    start-stop-daemon --start --quiet --exec /usr/sbin/lircd -- --device=/dev/lirc0
     echo "."
     ;;
   stop)

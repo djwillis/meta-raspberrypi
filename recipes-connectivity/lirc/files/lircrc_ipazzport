@@ -1,0 +1,57 @@
+## irexec
+begin
+     prog = irexec
+     button = BTN_0
+     config = /sbin/halt
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_MIDDLE
+     config = mpc toggle
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_RIGHT
+     config = mpc volume +3
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_LEFT
+     config = mpc volume -3
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_BACK
+     config = mpc prev
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_FORWARD
+     config = mpc next
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_MODE
+     config = mpc random
+     repeat = 0
+end
+
+begin
+     prog = irexec
+     button = BTN_MISC
+     config = next_mpd_playlist.sh
+     repeat = 0
+end
+

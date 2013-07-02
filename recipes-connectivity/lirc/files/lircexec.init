@@ -4,11 +4,11 @@
 # Copy it to /etc/init.d/lircexecd and type
 # > update-rc.d lircexecd defaults 20
 # It must be started after lircd (and it does alphabetically :-)
-# irexec reads /etc/lircrc by default
+# irexec reads /etc/lirc/lircrc by default
 
 
 test -f /usr/bin/irexec || exit 0
-test -f /etc/lircrc || exit 0
+test -f /etc/lirc/lircrc || exit 0
 
 case "$1" in
   start)
