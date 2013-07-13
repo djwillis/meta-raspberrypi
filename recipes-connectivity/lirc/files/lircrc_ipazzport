@@ -1,4 +1,6 @@
-## irexec
+## irexec commands for IPazzPort remote side
+
+# power button = shutdown system
 begin
      prog = irexec
      button = BTN_0
@@ -6,6 +8,7 @@ begin
      repeat = 0
 end
 
+# ok button = play/pause toggle
 begin
      prog = irexec
      button = BTN_MIDDLE
@@ -13,20 +16,23 @@ begin
      repeat = 0
 end
 
+# volume plus button = volume up
 begin
      prog = irexec
      button = BTN_RIGHT
-     config = mpc volume +3
+     config = amixer -q sset PCM 200+
      repeat = 0
 end
 
+# volume minus button = volume down
 begin
      prog = irexec
      button = BTN_LEFT
-     config = mpc volume -3
+     config = amixer -q sset PCM 200-
      repeat = 0
 end
 
+# channel minus button = previous track
 begin
      prog = irexec
      button = BTN_BACK
@@ -34,6 +40,7 @@ begin
      repeat = 0
 end
 
+# channel plus button = next track
 begin
      prog = irexec
      button = BTN_FORWARD
@@ -41,6 +48,7 @@ begin
      repeat = 0
 end
 
+# menu button = toggle random
 begin
      prog = irexec
      button = BTN_MODE
@@ -48,6 +56,7 @@ begin
      repeat = 0
 end
 
+# input button = next playlist
 begin
      prog = irexec
      button = BTN_MISC
