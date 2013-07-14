@@ -21,16 +21,22 @@ IMAGE_INSTALL = "\
     ${XSERVER} \
     ${DESKTOP_APPS} \
     vc-graphics-hardfp \
+    linux-firmware \
     bcm2835-tests \
     bash \
     nano \
     zram \
+    rsync \
+    screen \
     gkrellm \
     cpufrequtils \
     connman-tests \
+    python-shell \
     packagegroup-base-alsa \
     alsa-utils-speakertest \
+    alsa-utils-amixer \
     mpd \
+    mpc \
     empcd \
     mc \
     vim \
@@ -43,8 +49,13 @@ IMAGE_INSTALL = "\
     perl-module-getopt-std \
     usbutils \
     sysfsutils \
+    lirc \
+    lirc-exec \
+    lirc-remotes \
+    lirc-x \
     bluez-hcidump \
     bluez4-agent \
+    wpa-supplicant \
 "
 
 # core-image bbclass provides core-boot and base packages
@@ -68,6 +79,8 @@ DESKTOP_APPS = " \
     leafpad \
     leafpad-stock-icons \
     midori \
+    pidgin \
+    gnome-bluetooth \
     pcmanfm \
     xfmpc \
     gkrellm-client \

@@ -31,6 +31,7 @@ IMAGE_INSTALL = "\
     nano \
     zram \
     rsync \
+    screen \
     gkrellm \
     cpufrequtils \
     python-shell \
@@ -88,6 +89,7 @@ DESKTOP_APPS = " \
     gkrellm-client \
     gst-meta-video \
     gst-meta-audio \
+    wifi-radar \
 "
 
 WINDOW_MANAGER = " \
