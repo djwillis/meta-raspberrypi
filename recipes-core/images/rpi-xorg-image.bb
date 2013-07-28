@@ -2,7 +2,7 @@ DESCRIPTION = "A custom image based on core-image and x11."
 
 # don't include images based on core-image-minimal
 
-IMAGE_FEATURES += "package-management ssh-server-dropbear splash \
+IMAGE_FEATURES += "package-management ssh-server-openssh splash \
     x11-base hwcodecs"
 
 # you can override the following three parameters in your local.conf
@@ -44,6 +44,8 @@ IMAGE_INSTALL = "\
     mc \
     vim \
     file \
+    links \
+    irssi \
     tzdata \
     ntp \
     ntpdate \
@@ -67,6 +69,15 @@ inherit core-image
 XSERVER = " \
     packagegroup-core-x11 \
     packagegroup-core-x11-base \
+    libxi \
+    libxtst \
+    libx11-locale \
+    xorg-minimal-fonts \
+    gdk-pixbuf-loader-ico \
+    gdk-pixbuf-loader-bmp \
+    gdk-pixbuf-loader-ani \
+    gdk-pixbuf-xlib \
+    liberation-fonts \
     xkbcomp \
     xmodmap \
     xrdb \
@@ -96,7 +107,6 @@ WINDOW_MANAGER = " \
     openbox \
     openbox-config \
     openbox-core \
-    openbox-lxde \
     openbox-theme-bear2 \
     openbox-theme-clearlooks \
     openbox-theme-onyx \
