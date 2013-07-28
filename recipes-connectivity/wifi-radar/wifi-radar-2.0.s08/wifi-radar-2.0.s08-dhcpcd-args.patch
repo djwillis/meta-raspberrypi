@@ -1,0 +1,14 @@
+--- wifi-radar-2.0.s08/wifi-radar.orig	2013-07-14 16:49:39.657921224 -0700
++++ wifi-radar-2.0.s08/wifi-radar	2013-07-14 16:56:12.655181616 -0700
+@@ -2917,9 +2917,9 @@
+ config_dhcp = { # DHCP client
+ 				'command': '/sbin/dhcpcd',
+ 				# How long to wait for an IP addr from DHCP server
+-				'timeout': '30',
++				'timeout': '20',
+ 				# Arguments to use with DHCP client on connect
+-				'args': '-D -o -i dhcp_client -t %(timeout)s',
++				'args': '-D -i dhcp_client -t %(timeout)s',
+ 				# Argument to use with DHCP client on disconnect
+ 				'kill_args': '-k',
+ 				# The file where DHCP client PID is written

@@ -5,7 +5,7 @@ HOMEPAGE="http://www.bitbuilder.com/wifi_radar/"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
 
-PR = "r3"
+PR = "r4"
 
 PACKAGE_ARCH = "all"
 
@@ -18,6 +18,7 @@ RDEPENDS_${PN} = "dhcpcd \
     python-pycairo"
 
 SRC_URI="${SOURCEFORGE_MIRROR}/${PN}.berlios/${PN}-${PV}.tar.bz2 \
+         file://${P}-dhcpcd-args.patch \
 "
 
 S = "${WORKDIR}/${PN}-${PV}"
