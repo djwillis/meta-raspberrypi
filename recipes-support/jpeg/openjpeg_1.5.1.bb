@@ -16,6 +16,10 @@ inherit cmake
 
 EXTRA_OECMAKE="-DBUILD_SHARED_LIBS:BOOL=ON"
 
+do_install_append() {
+    rm -rf ${D}/usr/lib/openjpeg-1.5
+}
+
 do_install_append_class-native() {
     sed -i -e "s|prefix=/usr|prefix=${STAGING_DIR_NATIVE}/usr|" \
         ${S}/libopenjpeg1.pc
