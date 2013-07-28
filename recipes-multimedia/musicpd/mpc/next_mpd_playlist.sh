@@ -7,10 +7,12 @@
 # and resets to the first playlist on reboot (ignores playlist named all).
 # The playlist state is persistent on systems with a non-volatile /tmp dir.
 #   non-persistent path: /tmp
-#   persistent path: /var/cache
+#   persistent path: /var/lib/mpd
 # Also resets the volume to the standard 0db value (86 on the alsamixer scale).
 # Comment out the amixer call below to disable volume reset or remove the
 # sed call to stop the filtering of all.
+#
+# Run as root or add your user to the mpd and audio groups.
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin
 
@@ -22,7 +24,7 @@ if [ -z "$PLAYLISTS" ] ; then
 fi
 
 function do_next() {
-    CURRENT_INDEX=/var/cache/current_playlist_index
+    CURRENT_INDEX=/var/lib/mpd/current_playlist_index
     SIZE="$#"
     let "MAX = SIZE - 1"
 
