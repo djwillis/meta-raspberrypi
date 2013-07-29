@@ -18,7 +18,14 @@ SRC_URI = "http://www.phystech.com/ftp/dhcpcd-${PV}.tar.gz \
 
 inherit autotools
 
-EXTRA_OEMAKE = " 'INSTALL_STRIP_PROGRAM=/bin/true' 'INSTALL_STRIP_FLAG=' "
+do_configure_append() {
+    # remove the liberally sprinkled strip flags
+    sed -i \
+        -e "s|STRIP_FLAG=-s|STRIP_FLAG=|" \
+        -e "s|-c -s|-c|" \
+        -e "s|-s -O2|-O2|" \
+        Makefile
+}
 
 SRC_URI[md5sum] = "dd627a121e43835bead3ffef5b1a72fd"
 SRC_URI[sha256sum] = "f435e14e1f54dc8792f4e655463d07f2bdbe6d8a8581bd62f5167334ab18bb87"
