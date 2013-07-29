@@ -22,7 +22,7 @@ do_configure_prepend() {
 }
 
 do_install_append() {
-    rm -rf ${D}/lib/systemd
+    rm -rf ${D}/lib
     install -d ${D}/${localstatedir}/lib/ntp
     chown ntp:ntp ${D}/${localstatedir}/lib/ntp
 }
