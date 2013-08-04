@@ -10,4 +10,4 @@ PREFERRED_PROVIDER_linux-firmware ?= "linux-firmware"
 # custom ones for graphics, etc
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
-PREFERRED_PROVIDER_libasound-module-bluez ?= "bluez4"
+PREFERRED_PROVIDER_libasound-module-bluez = "bluez4"
