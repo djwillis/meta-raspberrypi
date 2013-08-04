@@ -86,6 +86,7 @@ do_configure_prepend() {
 		kernel_configure_variable PROC_PID_CPUSET y
 		kernel_configure_variable CGROUP_CPUACCT y
 		kernel_configure_variable RESOURCE_COUNTERS y
+		kernel_configure_variable RT_GROUP_SCHED y
 	fi
 
 	# root-over-nfs-over-usb-eth support. Limited, but should cover some cases
