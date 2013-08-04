@@ -61,6 +61,8 @@ IMAGE_INSTALL = "\
     bluez-hcidump \
     bluez4-agent \
     wpa-supplicant \
+    jack-server \
+    jack-utils \
 "
 
 # core-image bbclass provides core-boot and base packages
@@ -110,6 +112,7 @@ WINDOW_MANAGER = " \
     openbox-theme-bear2 \
     openbox-theme-clearlooks \
     openbox-theme-onyx \
+    openbox-backgrounds \
     gtk-theme-clearlooks \
     gtk-theme-crux \
     gtk-theme-mist \
