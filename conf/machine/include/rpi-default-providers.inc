@@ -4,8 +4,9 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-raspberrypi"
 PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
 PREFERRED_PROVIDER_virtual/egl ?= "vc-graphics-hardfp"
 PREFERRED_PROVIDER_virtual/libgles2 ?= "vc-graphics-hardfp"
-PREFERRED_PROVIDER_linux-libc-headers ?= "linux-libc-headers-raspberrypi"
+PREFERRED_PROVIDER_linux-libc-headers ?= "linux-libc-headers"
 PREFERRED_PROVIDER_linux-firmware ?= "linux-firmware"
+PREFERRED_PROVIDER_linux-libc-headers-dev ?= "linux-libc-headers-dev"
 
 # custom ones for graphics, etc
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
