@@ -13,7 +13,7 @@ PV = "2013+gitr${SRCPV}"
 PR = "r1"
 BRANCH = "meta-raspberrypi"
 
-SRC_URI = "git://git@github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
+SRC_URI = "git://github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
            file://empcd.init \
            file://empcd-ipazzport.conf \
 "
