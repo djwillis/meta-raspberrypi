@@ -6,6 +6,7 @@ LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://COPYING;md5=364a0fbae4ab4bac979efa128780258a"
 
 DEPENDS = "virtual/imlib2 giblib jpeg virtual/libx11 libxext libxt"
+RDEPENDS_${PN} += "imlib2-filters imlib2-loaders"
 
 SRC_URI = "http://feh.finalrewind.org/${P}.tar.bz2 \
 "

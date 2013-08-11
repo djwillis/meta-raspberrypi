@@ -99,10 +99,12 @@ DESKTOP_APPS = " \
     gnome-bluetooth \
     pcmanfm \
     xfmpc \
+    wifi-radar \
     gkrellm-client \
     gst-meta-video \
     gst-meta-audio \
-    wifi-radar \
+    imlib2-tests \
+    imlib2-themes \
 "
 
 WINDOW_MANAGER = " \
