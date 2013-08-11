@@ -5,6 +5,6 @@
 tint2 -c /etc/xdg/tint2/tint2rc &
 
 # uncomment to load a background image on startup (note: increases boot time)
-#display -dispose Background -window root /usr/share/backgrounds/binary-pi-red.jpg
+#feh --no-xinerama --image-bg black --bg-center '/usr/share/backgrounds/binary-pi-red.jpg'
 
 exec openbox-session
