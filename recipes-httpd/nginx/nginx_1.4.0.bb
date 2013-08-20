@@ -6,7 +6,7 @@ PRIORITY = "optional"
 
 DEPENDS = "libpcre gzip openssl"
 
-PR = "r2"
+PR = "r3"
 
 SRC_URI = " \
 	http://nginx.org/download/nginx-${PV}.tar.gz \
@@ -17,7 +17,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/nginx-${PV}"
 
-inherit autotools update-rc.d
+inherit autotools update-rc.d useradd
 
 SRC_URI[md5sum] = "d496e58864ab10ed56278b7655b0d0b2"
 SRC_URI[sha256sum] = "84aeb7a131fccff036dc80283dd98c989d2844eb84359cfe7c4863475de923a9"
@@ -26,14 +26,14 @@ SRC_URI[crosspatch.sha256sum] = "96cc3b087126caaa0951ab3e3f9f26169e9caf283dd2aeb
 LIC_FILES_CHKSUM = "file://LICENSE;md5=917bfdf005ffb6fd025550414ff05a9f"
 
 CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
-					${sysconfdir}/nginx/fastcgi.conf\
-					${sysconfdir}/nginx/fastcgi_params \
-					${sysconfdir}/nginx/koi-utf \
-					${sysconfdir}/nginx/koi-win \
-					${sysconfdir}/nginx/mime.types \
-					${sysconfdir}/nginx/scgi_params \
-					${sysconfdir}/nginx/uwsgi_params \
-					${sysconfdir}/nginx/win-utf \
+		${sysconfdir}/nginx/fastcgi.conf\
+		${sysconfdir}/nginx/fastcgi_params \
+		${sysconfdir}/nginx/koi-utf \
+		${sysconfdir}/nginx/koi-win \
+		${sysconfdir}/nginx/mime.types \
+		${sysconfdir}/nginx/scgi_params \
+		${sysconfdir}/nginx/uwsgi_params \
+		${sysconfdir}/nginx/win-utf \
 "
 
 INITSCRIPT_NAME = "nginx"
@@ -67,10 +67,9 @@ do_configure () {
 }
 
 do_install_append () {
-    install -d ${D}${localstatedir}/www
-    mv ${D}/usr/html ${D}${localstatedir}/www/
-    chown www-data:www-data -R ${D}${localstatedir}/www
-    chmod g+w -R ${D}/${localstatedir}/www
+    install -d ${D}${localstatedir}/www/localhost
+    mv ${D}/usr/html ${D}${localstatedir}/www/localhost/
+    chown www:www-data -R ${D}${localstatedir}
 
     install -d ${D}${sysconfdir}/init.d
     install -d ${D}${sysconfdir}/nginx
@@ -78,8 +77,15 @@ do_install_append () {
     install -m 0644 ${WORKDIR}/nginx.conf ${D}${sysconfdir}/nginx/
 
     install -d ${D}${sysconfdir}/default/volatiles
-    echo "d www-data www-data 0755 ${localstatedir}/run/nginx none" \
+    echo "d www www-data 0755 ${localstatedir}/run/nginx none" \
         > ${D}${sysconfdir}/default/volatiles/99_nginx
 }
 
 FILES_${PN} += "${localstatedir}/ /run/"
+
+USERADD_PACKAGES = "${PN}"
+USERADD_PARAM_${PN} = " \
+    --system --no-create-home \
+    --home ${localstatedir}/www/localhost \
+    --groups www-data \
+    --user-group www"
