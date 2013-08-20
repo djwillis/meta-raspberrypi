@@ -13,12 +13,12 @@ do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/mpd ${D}${sysconfdir}/init.d/
 
-    chown mpd:mpd ${D}/${localstatedir}/lib/mpd
     chmod 0775 ${D}/${localstatedir}/lib/mpd
+    chown mpd:mpd ${D}/${localstatedir}/lib/mpd
 
     install -d ${D}${sysconfdir}/default/volatiles
     echo "d mpd mpd 0775 ${localstatedir}/run/mpd none" \
         > ${D}${sysconfdir}/default/volatiles/99_mpd
 }
 
-FILES_${PN} += "${sysconfdir}/init.d/* /var/run/*"
+FILES_${PN} += "${sysconfdir}/init.d/* /var/*"
