@@ -12,9 +12,9 @@ SRC_URI = "\
           "
 S = "${WORKDIR}/${SRCNAME}-${PV}"
 
-inherit setuptools
+inherit distutils
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
-SRC_URI[md5sum] = "f7dc0330158b71ccb7837d3aca644362"
-SRC_URI[sha256sum] = "62b9e482135af4d1b15624c824dcba15199d9c9d34d8b3e6e7ab5e6c517c9005"
+SRC_URI[md5sum] = "9cb086d2d2186062c5ae190a40902bb0"
+SRC_URI[sha256sum] = "f3342113d39901e5af1460374ff167590c427cb55460d2bda86c72bc64efc526"
