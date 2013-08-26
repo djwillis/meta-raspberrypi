@@ -1,8 +1,9 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Don't forget to bump PRINC if you update the extra files.
-PRINC := "${@int(PRINC) + 4}"
+PRINC := "${@int(PRINC) + 6}"
 
-SRC_URI_append = "file://mpd"
+SRC_URI_append = "file://mpd \
+"
 
 inherit update-rc.d
 
@@ -13,12 +14,20 @@ do_install_append() {
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${WORKDIR}/mpd ${D}${sysconfdir}/init.d/
 
-    chmod 0775 ${D}/${localstatedir}/lib/mpd
     chown mpd:mpd ${D}/${localstatedir}/lib/mpd
 
     install -d ${D}${sysconfdir}/default/volatiles
     echo "d mpd mpd 0775 ${localstatedir}/run/mpd none" \
         > ${D}${sysconfdir}/default/volatiles/99_mpd
+    echo "d mpd mpd 0775 ${localstatedir}/log/mpd none" \
+        >> ${D}${sysconfdir}/default/volatiles/99_mpd
+}
+
+pkg_postinst_${PN} () {
+if test "x$D" != "x"; then
+    exit 1
+fi
+sed -i -e "s|log/mpd|log/mpd/mpd|" ${sysconfdir}/mpd.conf
 }
 
 FILES_${PN} += "${sysconfdir}/init.d/* /var/*"
