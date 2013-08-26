@@ -8,7 +8,7 @@ DEPENDS = "libpcre gzip openssl"
 RDEPENDS_${PN}-rpidata = "nginx"
 RRECOMMENDS_${PN} = "nginx-rpidata"
 
-PR = "r2"
+PR = "r3"
 
 SRC_URI = " \
 	http://nginx.org/download/nginx-${PV}.tar.gz \
