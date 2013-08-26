@@ -54,6 +54,8 @@ IMAGE_INSTALL = "\
     perl-module-getopt-std \
     usbutils \
     sysfsutils \
+    findutils \
+    git \
     lirc \
     lirc-exec \
     lirc-remotes \
@@ -115,6 +117,7 @@ WINDOW_MANAGER = " \
     openbox-theme-clearlooks \
     openbox-theme-onyx \
     openbox-backgrounds \
+    libcanberra-gtk2 \
     gtk-theme-clearlooks \
     gtk-theme-crux \
     gtk-theme-mist \
@@ -122,6 +125,8 @@ WINDOW_MANAGER = " \
     gnome-icon-theme \
     gnome-icon-theme-enable \
     hicolor-icon-theme \
+    pyxdg \
+    xdg-utils \
     obconf \
     tint2 \
 "
