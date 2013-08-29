@@ -55,6 +55,10 @@ IMAGE_INSTALL = "\
     usbutils \
     sysfsutils \
     findutils \
+    dosfstools \
+    nfs-utils \
+    cifs-utils \
+    ntfs-3g-ntfsprogs \
     git \
     lirc \
     lirc-exec \
