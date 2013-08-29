@@ -23,11 +23,9 @@ do_install_append() {
         >> ${D}${sysconfdir}/default/volatiles/99_mpd
 }
 
-pkg_postinst_${PN} () {
-if test "x$D" != "x"; then
-    exit 1
-fi
-sed -i -e "s|log/mpd|log/mpd/mpd|" ${sysconfdir}/mpd.conf
+pkg_postinst_${PN}_append () {
+sed -i -e "s|log/mpd|log/mpd/mpd|" $D${sysconfdir}/mpd.conf
+chown mpd:mpd $D${localstatedir}/lib/mpd
 }
 
 FILES_${PN} += "${sysconfdir}/init.d/* /var/*"
