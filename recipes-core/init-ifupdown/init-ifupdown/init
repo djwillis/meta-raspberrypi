@@ -64,7 +64,8 @@ check_network_cruft() {
 case "$1" in
 start)
 	echo -n "Configuring network interfaces... "
-	check_network_cruft
+	# uncomment if hard shutdowns keep networking from starting on boot
+	#check_network_cruft
 	ifup -a
 	echo "done."
 	;;
