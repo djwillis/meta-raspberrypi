@@ -58,7 +58,7 @@ IMAGE_INSTALL = "\
     dosfstools \
     nfs-utils \
     cifs-utils \
-    ntfs-3g-ntfsprogs \
+    ntfsprogs \
     git \
     lirc \
     lirc-exec \
