@@ -31,9 +31,9 @@ Contents:
 2. Yocto BSP Layer - RaspberryPi
     2.A. Compressed deployed files
     2.B. GPU memory
-    2.C. Add purchased license codecs
-    2.D. Disable overscan
-    2.E. Set overclocking options
+    2.C. Set overclocking options
+    2.D. Add purchased license codecs
+    2.E. Optional - RPi and Xorg Image Config Parameters in local.conf
 3. Contribution
 
 
@@ -74,7 +74,7 @@ OpenEmbedded/Yocto distributions and layer stacks, such as:
 * Angstrom (main focus of upstream testing).
 * Yocto/Poky (main focus of this fork; see Section 2 below).
 
-The (upstrem) layer in its entirety depends on:
+This (upstrem) layer in its entirety depends on:
 
 URI: git://git.openembedded.org/openembedded-core
 branch: master
@@ -89,7 +89,7 @@ revision: HEAD
 2. Yocto BSP Layer - RaspberryPi
 ================================
 
-The (sarnold forked) layer depends on:
+This (sarnold forked) layer depends on:
 
 URI: git://git.yoctoproject.org/poky
 branch: master
@@ -103,15 +103,17 @@ How to use it:
 
 1. source poky/oe-init-build-env rpi-build
 2. Add needed layers to bblayers.conf:
+  (for basic upstream hw image)
     - meta-raspberrypi
     - meta-openembedded/meta-oe
+  (for rpi-xorg or rpi-sato images)
     - meta-openembedded/meta-gnome
     - meta-openembedded/meta-networking
     - meta-openembedded/meta-multimedia
     - meta-openembedded/meta-efl
     - meta-openembedded/meta-xfce
 3  Set MACHINE to raspberrypi in local.conf
-4. bitbake rpi-xorg-image
+4. bitbake [rpi-hwup-image|rpi-xorg-image|rpi-sato-image]
 5. dd the .sdimg file to an SD card (use xzcat if rpi-sdimg.xz is used)
 6. Boot your RPi.
 
