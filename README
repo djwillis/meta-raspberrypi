@@ -42,21 +42,22 @@ Contents:
 =======================================
 
 This is the general hardware specific BSP overlay for the RaspberryPi device.
-It should be used with openembedded-core (not old-style org.openembedded.dev).
+It should be used with openembedded-core (oe-core, not old-style org.openembedded.dev).
 
 More information can be found at:
 
-                   http://www.raspberrypi.org/ (Official Site)
-                   http://www.distant-earth.com/ (My Site)
+             http://www.raspberrypi.org/ (official RPi site)
+             http://www.distant-earth.com/ (upstream author layer site)
+             http://www.gentoogeek.org/ (sarnold layer site)
 
 Build scripts patched to support making a firmware image for the RaspberryPi
 with Angstrom can be found at:
 
-                   http://github.com/Angstrom-distribution/setup-scripts
+             http://github.com/Angstrom-distribution/setup-scripts
 
 When not depending on meta-openembedded and not using systemd, you may need to
 mask few recipes requiring systemd or other recipes not included in your
-distribution of choice.
+distribution of choice (note: rpi-xorg image builds without systemd).
 
 You can achieve this by adding something like the following to local.conf:
 
@@ -70,10 +71,10 @@ The core BSP part of meta-raspberrypi should work with different
 OpenEmbedded/Yocto distributions and layer stacks, such as:
 
 * Distro-less (only with OE-Core).
-* Angstrom (main focus of testing).
-* Yocto/Poky.
+* Angstrom (main focus of upstream testing).
+* Yocto/Poky (main focus of this fork; see Section 2 below).
 
-This layer in its entirety depends on:
+The (upstrem) layer in its entirety depends on:
 
 URI: git://git.openembedded.org/openembedded-core
 branch: master
@@ -88,7 +89,7 @@ revision: HEAD
 2. Yocto BSP Layer - RaspberryPi
 ================================
 
-This layer depends on:
+The (sarnold forked) layer depends on:
 
 URI: git://git.yoctoproject.org/poky
 branch: master
@@ -104,21 +105,28 @@ How to use it:
 2. Add needed layers to bblayers.conf:
     - meta-raspberrypi
     - meta-openembedded/meta-oe
+    - meta-openembedded/meta-gnome
+    - meta-openembedded/meta-networking
+    - meta-openembedded/meta-multimedia
+    - meta-openembedded/meta-efl
+    - meta-openembedded/meta-xfce
 3  Set MACHINE to raspberrypi in local.conf
-4. bitbake rpi-hwup-image
-5. dd to a SD card the generated sdimg file (use xzcat if rpi-sdimg.xz is used)
-6. Boot your RPI.
+4. bitbake rpi-xorg-image
+5. dd the .sdimg file to an SD card (use xzcat if rpi-sdimg.xz is used)
+6. Boot your RPi.
 
 2.A. Optional - compressed deployed files:
 ==========================================
-1. Overwrite IMAGE_FSTYPES in local.conf
+1. Override IMAGE_FSTYPES in local.conf
 	IMAGE_FSTYPES = "tar.bz2 ext3.xz rpi-sdimg.xz
-2. Overwrite SDIMG_ROOTFS_TYPE in local.conf
+2. Override SDIMG_ROOTFS_TYPE in local.conf
 	SDIMG_ROOTFS_TYPE = "ext3.xz"
-*Accommodate the values above to your own needs (ex: ext3 / ext4).
+*Accommodate the values above to your own needs (ex: ext3 / tar.bz2).
 
 2.B. Optional - GPU memory:
 ===========================
+You can also specify the amount of RAM used by the GPU in config.txt:
+
 Variable    : Details
 GPU_MEM     : GPU memory in megabyte. Sets the memory split between the ARM and
               GPU. ARM gets the remaining memory. Min 16. Default 64.
@@ -127,23 +135,7 @@ GPU_MEM_256 : GPU memory in megabyte for the 256MB Raspberry Pi. Ignored by the
 GPU_MEM_512 : GPU memory in megabyte for the 512MB Raspberry Pi. Ignored by the
               256MB RP. Overrides gpu_mem. Max 448. Default not set.
 
-2.C.Optional - Add purchased license codecs:
-============================================
-To add you own licenses use variables KEY_DECODE_MPG2 and KEY_DECODE_WVC1 in
-local.conf. Example:
-KEY_DECODE_MPG2 = "12345678"
-KEY_DECODE_WVC1 = "12345678"
-You can supply more licenses separated by comma. Example:
-KEY_DECODE_WVC1 = "0x12345678,0xabcdabcd,0x87654321"
-
-2.D. Optional - Disable overscan:
-=================================
-By default the GPU adds a black border around the video output to compensate for
-TVs which cut off part of the image. To disable this set this variable in
-local.conf:
-DISALE_OVERSCAN = "0"
-
-2.E. Optional - Set overclocking options:
+2.C. Optional - Set overclocking options:
 =========================================
 The Raspberry PI can be overclocked. As of now overclocking up to the "Turbo
 Mode" is officially supported by the raspbery and does not void warranty.
@@ -154,19 +146,71 @@ CORE_FREQ = "500"
 SDRAM_FREQ = "500"
 OVER_VOLTAGE = "6"
 
+2.D.Optional - Add purchased license codecs:
+============================================
+To add you own licenses use variables KEY_DECODE_MPG2 and KEY_DECODE_WVC1 in
+local.conf. Example:
+KEY_DECODE_MPG2 = "12345678"
+KEY_DECODE_WVC1 = "12345678"
+You can supply more licenses separated by comma. Example:
+KEY_DECODE_WVC1 = "0x12345678,0xabcdabcd,0x87654321"
+
+2.E. Optional - RPi and Xorg Image Config Parameters in local.conf:
+===================================================================
+The local.conf file generated by the oe-init-build-env script initially contains
+only the usual OE build defaults; for example, you should make sure MACHINE is set
+to raspberrypi, and you may want to customize things like DL_DIR, etc.  There are
+also RPi-specific options, some in upstream, and some in this fork  The options
+specific to the RPi are set in config.txt on the RPi and can be changed at any time.
+Other options generate config parameters in the relevant config files under /etc.
+
+Upstream Layer:
+By default the GPU adds a black border around the video output to compensate for
+TVs which cut off part of the image. To disable this set this variable in
+local.conf:
+DISALE_OVERSCAN = "0"
+
+This Fork:
+You can set the default timezone to any of the valid values in /usr/share/zoneinfo:
+DEFAULT_TIMEZONE = "PST8PDT"
+
+You should set the default hdmi_drive audio parameter, since the built-in value
+didn't seem to produce any sound.  Possible values are 1 (for DVI only) or
+2 (for HDMI with audio):
+DEFAULT_AUDIO_OUT = "2"
+
+For real-time audio with jack, you need cgroups in order to use RT_GROUP_SCHED:
+KERNEL_ENABLE_CGROUPS = "1"
+
+If you want to expose your RPi package feed with a custom URL, then set both of
+the following.  Set the first one to "external" and the second to a public URL;
+the resulting URL is used in /etc/opkg/ in local-feeds.conf:
+CUSTOM_FEED_CONFIG = "external"  # possible values are internal or external
+CUSTOM_FEED_URL = "www.gentoogeek.org"
 
 
 3. Contributing
 ===============
 
-To contribute to this layer you should send the patches for review to the
+To contribute to this fork, request additional packages, or report issues, please
+use the issue tracker on github:
+
+             https://github.com/sarnold/meta-raspberrypi/issues
+
+If you have a fork on github, feel free to make a pull request (sarnold fork).
+
+Source code:
+
+    https://github.com/sarnold/meta-raspberrypi
+
+To contribute to the upstream layer you should send the patches for review to the
 mailing list.
 
 Mailing list:
 
     https://lists.yoctoproject.org/listinfo/yocto
 
-Source code:
+Upstream Source code:
 
     git://git.yoctoproject.org/meta-raspberrypi
     http://git.yoctoproject.org/git/meta-raspberrypi
