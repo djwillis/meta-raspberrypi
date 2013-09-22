@@ -109,9 +109,10 @@ How to use it:
     - meta-openembedded/meta-efl
     - meta-openembedded/meta-xfce
 3  Set MACHINE to raspberrypi in local.conf
-4. bitbake [rpi-hwup-image|rpi-xorg-image|rpi-sato-image]
-5. dd the .sdimg file to an SD card (use xzcat if rpi-sdimg.xz is used)
-6. Boot your RPi.
+4. Set any other desired parameters in local.conf (see following sections)
+5. bitbake [rpi-hwup-image|rpi-xorg-image|rpi-sato-image]
+6. dd the .sdimg file to an SD card
+7. Boot your RPi.
 
 2.A. Optional - compressed deployed files:
 ==========================================
@@ -178,7 +179,7 @@ CUSTOM_FEED_URL = "www.gentoogeek.org"
 
 To contribute to this fork, request additional packages, or report issues, please use the issue tracker on github:
 
-             https://github.com/sarnold/meta-raspberrypi/issues
+    https://github.com/sarnold/meta-raspberrypi/issues
 
 If you have a fork on github, feel free to make a pull request (sarnold fork).
 
@@ -198,11 +199,12 @@ Upstream Source code:
     http://git.yoctoproject.org/git/meta-raspberrypi
     https://github.com/djwillis/meta-raspberrypi
 
-When sending patches, please use something like:
+When sending patches upstream, please use something like:
 
 git send-email --to yocto@yoctoproject.org \
 --subject-prefix='meta-raspberrypi][PATCH'
 
+Maintainer of this fork: Steve Arnold <stephen.arnold42 at gmail.com>
 
-Layer maintainers: John Willis <John.Willis at distant-earth.com>
-                   Andrei Gherzan <andrei at gherzan.ro>
+Upstream Layer maintainers: John Willis <John.Willis at distant-earth.com>
+                            Andrei Gherzan <andrei at gherzan.ro>
