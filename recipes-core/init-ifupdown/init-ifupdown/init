@@ -56,16 +56,15 @@ check_network_swap() {
 }
 
 check_network_cruft() {
-    # hard shutdowns leave these files which pooches network startup
-    [ -e /run/udhcpc.eth0.pid ] && rm -f /run/udhcpc.eth0.pid
-    [ -e /run/ifstate ] && rm -f /run/ifstate
+    # hard shutdowns leave this pid file which pooches network startup
+    test -e /run/udhcpc.eth0.pid && rm -f /run/udhcpc.eth0.pid
 }
 
 case "$1" in
 start)
 	echo -n "Configuring network interfaces... "
 	# uncomment if hard shutdowns keep networking from starting on boot
-	#check_network_cruft
+	check_network_cruft
 	ifup -a
 	echo "done."
 	;;
