@@ -95,7 +95,6 @@ revision: HEAD
 How to use it:
 
 1. source poky/oe-init-build-env rpi-build
-<<<<<<< HEAD
 2. Add needed layers to bblayers.conf:
   (for basic upstream hw image)
     - meta-raspberrypi
