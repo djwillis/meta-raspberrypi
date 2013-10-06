@@ -1,6 +1,10 @@
 DESCRIPTION = "A custom image based on core-image and x11."
 
-# don't include images based on core-image-minimal
+# this shouldn't be required, but seems to be now...
+include rpi-hwup-image.bb
+
+# core-image bbclass provides core-boot and base packages
+inherit core-image
 
 IMAGE_FEATURES += "package-management ssh-server-openssh splash \
     x11-base hwcodecs"
@@ -23,10 +27,13 @@ IMAGE_INSTALL = "\
     ${EXTRA_TIMEZONES} \
     ${XSERVER} \
     ${WINDOW_MANAGER} \
+    ${DEJAVU_FONTS} \
     ${DESKTOP_APPS} \
     vc-graphics-hardfp \
-    linux-firmware \
     bcm2835-tests \
+    linux-raspberrypi-firmware \
+    packagegroup-base-vfat \
+    encodings \
     bash \
     nano \
     zram \
@@ -71,12 +78,10 @@ IMAGE_INSTALL = "\
     jack-utils \
 "
 
-# core-image bbclass provides core-boot and base packages
-inherit core-image
-
 XSERVER = " \
     packagegroup-core-x11 \
     packagegroup-core-x11-base \
+    packagegroup-fonts-truetype-core \
     libxi \
     libxtst \
     libx11-locale \
@@ -90,6 +95,7 @@ XSERVER = " \
     xmodmap \
     xrdb \
     setxkbmap \
+    xterm \
 "    
 
 DESKTOP_APPS = " \
@@ -97,15 +103,14 @@ DESKTOP_APPS = " \
     feh \
     mupdf \
     xchat \
+    midori \
     vala-terminal \
     leafpad \
     leafpad-stock-icons \
-    midori \
     pidgin \
     gnome-bluetooth \
     pcmanfm \
     xfmpc \
-    wifi-radar \
     gkrellm-client \
     gst-meta-video \
     gst-meta-audio \
@@ -133,6 +138,14 @@ WINDOW_MANAGER = " \
     xdg-utils \
     obconf \
     tint2 \
+"
+
+DEJAVU_FONTS = " \
+    ttf-dejavu-sans \
+    ttf-dejavu-sans-condensed \
+    ttf-dejavu-sans-mono \
+    ttf-dejavu-serif \
+    ttf-dejavu-serif-condensed \
 "
 
 EXTRA_TIMEZONES = " \

@@ -9,8 +9,8 @@ DEPENDS = "mpd"
 inherit update-rc.d
 
 SRCREV = "${AUTOREV}"
-PV = "2013+gitr${SRCPV}"
-PR = "r1"
+#PV = "2013+gitr${SRCPV}"
+PR = "r2"
 BRANCH = "meta-raspberrypi"
 
 SRC_URI = "git://github.com/sarnold/empcd.git;protocol=http;branch=${BRANCH} \
