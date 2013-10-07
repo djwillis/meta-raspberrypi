@@ -3,6 +3,14 @@
 <openbox_menu xmlns="http://openbox.org/3.4/menu">
 
 <menu id="apps-editors-menu" label="Editors">
+  <item label="gvim">
+    <action name="Execute">
+      <command>gvim</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
   <item label="LeafPad">
     <action name="Execute">
       <command>leafpad</command>
@@ -50,6 +58,14 @@
   <item label="XChat">
     <action name="Execute">
       <command>xchat</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Pidgin">
+    <action name="Execute">
+      <command>pidgin</command>
       <startupnotify>
         <enabled>yes</enabled>
       </startupnotify>
