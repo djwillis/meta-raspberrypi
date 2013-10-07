@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 # Don't forget to bump PRINC if you update the extra files.
-PRINC := "${@int(PRINC) + 4}"
+PRINC := "${@int(PRINC) + 7}"
 
 SRC_URI += "file://volatiles"
 
