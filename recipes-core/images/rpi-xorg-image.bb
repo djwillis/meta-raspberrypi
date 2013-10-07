@@ -1,4 +1,5 @@
-DESCRIPTION = "A custom image based on core-image and x11."
+DESCRIPTION = "A custom openbox image based on core-image and x11."
+PR = "r4"
 
 # this shouldn't be required, but seems to be now...
 include rpi-hwup-image.bb
@@ -11,6 +12,9 @@ IMAGE_FEATURES += "package-management ssh-server-openssh splash \
 
 # you can override the following three parameters in your local.conf
 DEFAULT_TIMEZONE ?= "Universal"
+
+# disable overscan in config.txt
+DISALE_OVERSCAN = "0"
 
 # possible values are 1 (DVI only) or 2 (hdmi with audio)
 DEFAULT_AUDIO_OUT ?= "2"
@@ -33,6 +37,7 @@ IMAGE_INSTALL = "\
     bcm2835-tests \
     linux-raspberrypi-firmware \
     packagegroup-base-vfat \
+    udev-utils \
     encodings \
     bash \
     nano \
