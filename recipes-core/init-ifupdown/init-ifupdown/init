@@ -56,8 +56,9 @@ check_network_swap() {
 }
 
 check_network_cruft() {
-    # hard shutdowns leave this pid file which pooches network startup
+    # hard shutdowns leaves stale files which pooches network startup
     test -e /run/udhcpc.eth0.pid && rm -f /run/udhcpc.eth0.pid
+    test -e /run/ifstate && rm -f /run/ifstate
 }
 
 case "$1" in
