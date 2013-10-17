@@ -6,7 +6,7 @@ PRIORITY = "optional"
 
 DEPENDS = "libpcre gzip openssl"
 
-PR = "r4"
+PR = "r0"
 
 SRC_URI = " \
 	http://nginx.org/download/nginx-${PV}.tar.gz \
@@ -15,14 +15,10 @@ SRC_URI = " \
 	file://nginx.init \
 "
 
-S = "${WORKDIR}/nginx-${PV}"
-
-inherit autotools update-rc.d useradd
+inherit update-rc.d useradd siteinfo
 
 SRC_URI[md5sum] = "d496e58864ab10ed56278b7655b0d0b2"
 SRC_URI[sha256sum] = "84aeb7a131fccff036dc80283dd98c989d2844eb84359cfe7c4863475de923a9"
-SRC_URI[crosspatch.md5sum] = "707c4cdd6bb82719ea2ed50971101c21"
-SRC_URI[crosspatch.sha256sum] = "96cc3b087126caaa0951ab3e3f9f26169e9caf283dd2aeb689ed6c435070f052"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=917bfdf005ffb6fd025550414ff05a9f"
 
 CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
@@ -39,34 +35,37 @@ CONFFILES_${PN} = "${sysconfdir}/nginx/nginx.conf \
 INITSCRIPT_NAME = "nginx"
 INITSCRIPT_PARAMS = "defaults 92 20"
 
-do_configure () {
-	PTRSIZE=$(expr ${SITEINFO_BITS} / 8)
+do_configure() {
+    PTRSIZE=$(expr ${SITEINFO_BITS} / 8)
 
-	echo $CFLAGS
-	echo $LDFLAGS
+    echo $PTRSIZE
+    echo $CFLAGS
+    echo $LDFLAGS
 
-	./configure \
-	--crossbuild=Linux:${TUNE_ARCH} \
-	--with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
-	--with-int=4 \
-	--with-long=${PTRSIZE} \
-	--with-long-long=8 \
-	--with-ptr-size=${PTRSIZE} \
-	--with-sig-atomic-t=${PTRSIZE} \
-	--with-size-t=${PTRSIZE} \
-	--with-off-t=${PTRSIZE} \
-	--with-time-t=${PTRSIZE} \
-	--with-sys-nerr=132 \
-	--conf-path=/etc/nginx/nginx.conf \
-	--http-log-path=/var/log/nginx/access.log \
-	--error-log-path=/var/log/nginx/error.log \
-	--pid-path=/var/run/nginx/nginx.pid \
-	--prefix=/usr \
-	--with-http_ssl_module \
-	--with-http_gzip_static_module
+    ./configure \
+        --crossbuild=Linux:${TUNE_ARCH} \
+        --with-endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+        --with-int=4 \
+        --with-long=${PTRSIZE} \
+        --with-long-long=8 \
+        --with-ptr-size=${PTRSIZE} \
+        --with-sig-atomic-t=${PTRSIZE} \
+        --with-size-t=${PTRSIZE} \
+        --with-off-t=${PTRSIZE} \
+        --with-time-t=${PTRSIZE} \
+        --with-sys-nerr=132 \
+        --conf-path=/etc/nginx/nginx.conf \
+        --http-log-path=/var/log/nginx/access.log \
+        --error-log-path=/var/log/nginx/error.log \
+        --pid-path=/var/run/nginx/nginx.pid \
+        --prefix=/usr \
+        --with-http_ssl_module \
+        --with-http_gzip_static_module
 }
 
-do_install_append () {
+do_install() {
+    oe_runmake DESTDIR="${D}" install
+
     install -d ${D}${localstatedir}/www/localhost
     mv ${D}/usr/html ${D}${localstatedir}/www/localhost/
     chown www:www-data -R ${D}${localstatedir}
@@ -79,9 +78,11 @@ do_install_append () {
     install -d ${D}${sysconfdir}/default/volatiles
     echo "d www www-data 0755 ${localstatedir}/run/nginx none" \
         > ${D}${sysconfdir}/default/volatiles/99_nginx
+
+    rm -fr "${D}${localstatedir}/run"
 }
 
-FILES_${PN} += "${localstatedir}/ /run/"
+FILES_${PN} += "${localstatedir}"
 
 USERADD_PACKAGES = "${PN}"
 USERADD_PARAM_${PN} = " \
