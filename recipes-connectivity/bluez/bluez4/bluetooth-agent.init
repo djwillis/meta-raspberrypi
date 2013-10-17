@@ -13,7 +13,7 @@
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 DESC="Start Bluetooth-Agent at boot time"
 NAME="bluetooth-agent"
-DAEMON="/usr/bin/$NAME"
+DAEMON="/usr/sbin/$NAME"
 
 USER=root
 HOME=/root

@@ -8,7 +8,7 @@ AUTHOR = "Mike McCauley (mikem@open.com.au)"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
-PR = "r0"
+PR = "r2"
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
@@ -17,6 +17,7 @@ SRC_URI = "http://www.open.com.au/mikem/bcm2835/bcm2835-1.9.tar.gz"
 SRC_URI[md5sum] = "c102938afe9f0cfa930a0255c422f792"
 SRC_URI[sha256sum] = "0dc6ee5a261e76b103a04534c1b8ebc20dce8921dec2452785100812f978c883"
 
+RDEPENDS_${PN}-dev = "bcm2835-tests"
 
 PACKAGES += "${PN}-tests"
 
@@ -36,6 +37,9 @@ do_compile_append() {
 
 do_install_append() {
     install -d ${D}/${libdir}/${BPN}
+    install -d ${D}/${includedir}/${BPN}
+    install src/bcm2835.h ${D}/${includedir}/${BPN}
+
     for file in examples/*
     do
         install -m 0755 ${file}/${file##*/} ${D}/${libdir}/${BPN}

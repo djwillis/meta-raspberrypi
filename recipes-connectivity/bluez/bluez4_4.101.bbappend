@@ -1,5 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-PRINC := "${@int(PRINC) + 5}"
+PRINC := "${@int(PRINC) + 6}"
 
 SRC_URI_append = "file://bluez-plugdev.patch \
                   file://bluetooth-agent.init \
@@ -56,7 +56,7 @@ do_install_append() {
   done
 
   install -m 0755 ${S}/test/monitor-bluetooth ${D}/${bindir}
-  install -m 0755 ${S}/test/agent ${D}/${bindir}/bluetooth-agent
+  install -m 0755 ${S}/test/agent ${D}/${sbindir}/bluetooth-agent
 }
 
 PACKAGES =+ "bluez4-agent"
@@ -64,4 +64,4 @@ RPROVIDES_${PN}-agent = "bluetooth-agent"
 
 FILES_${PN} += "/usr/lib/gstreamer-0.10/*"
 FILES_${PN}-agent = "${sysconfdir}/init.d/bluetooth-agent \
- ${bindir}/bluetooth-agent ${sysconfdir}/default/bluetooth-agent"
+ ${sbindir}/bluetooth-agent ${sysconfdir}/default/bluetooth-agent"
