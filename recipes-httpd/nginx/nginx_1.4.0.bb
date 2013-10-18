@@ -1,8 +1,7 @@
-DESCRIPTION = "HTTP and reverse proxy server"
+SUMMARY = "HTTP and reverse proxy server for embedded environments"
 HOMEPAGE = "http://nginx.org/"
-LICENSE = "BSD"
+LICENSE = "BSD-2-Clause"
 SECTION = "net"
-PRIORITY = "optional"
 
 DEPENDS = "libpcre gzip openssl"
 
