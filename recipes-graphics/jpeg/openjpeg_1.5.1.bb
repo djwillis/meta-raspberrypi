@@ -5,7 +5,7 @@ SECTION = "libs"
 LICENSE = "BSD"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1153c321aaa5ae2733736b49673563d9"
 
-PR = "r0"
+PR = "r1"
 BBCLASSEXTEND = "native"
 
 SRC_URI = "http://openjpeg.googlecode.com/files/openjpeg-${PV}.tar.gz"
@@ -18,6 +18,8 @@ EXTRA_OECMAKE="-DBUILD_SHARED_LIBS:BOOL=ON"
 
 do_install_append() {
     rm -rf ${D}/usr/lib/openjpeg-1.5
+
+    ln -sf openjpeg-1.5/openjpeg.h ${D}${includedir}/openjpeg.h
 }
 
 do_install_append_class-native() {

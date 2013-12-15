@@ -5,13 +5,24 @@ SECTION = "x11/applications"
 LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=73f1eb20517c55bf9493b7dd6e480788"
 
-SRCREV = "1.2"
-PV = "${SRCREV}"
+inherit gitpkgv
+
+TAG = "1.2"
+BRANCH = "master"
+
+# what happened to the git fetcher? no more tags as SRCREVs?
+#### this is 1.3 hash
+#SRCREV = "8530783a10e467947f8698cf44d38313b5454cb2"
+#### this is 1.2 hash
+SRCREV = "9d20a4f3a69fdea855f8678c1ad50b5db7472d81"
+PKGV = "${GITPKGVTAG}"
+
+#PV = "${TAG}"
 PR = "r0"
 
 DEPENDS = "openjpeg-native jbig2dec-native libjpeg-turbo-native freetype-native libpng-native openjpeg jbig2dec libjpeg-turbo zlib virtual/libx11 libxext freetype"
 
-SRC_URI = "git://git.ghostscript.com/mupdf.git;protocol=http"
+SRC_URI = "git://git.ghostscript.com/mupdf.git;protocol=http;branch=${BRANCH}"
 
 inherit cmake
 
