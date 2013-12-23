@@ -36,7 +36,12 @@ Contents:
     2.E. Optional - RPi and Xorg Image Config Parameters in local.conf
 3. Extra apps
     3.A. omxplayer
-4. Contribution
+4. Source code and mirrors
+5. Contribution
+    5.A. Mailing List
+    5.B. Gerrit Review Server
+    5.C. Trello Board
+6. Maintainers
 
 
 1. OpenEmbedded BSP Layer - RaspberryPi
@@ -113,11 +118,13 @@ How to use it:
 
 2.A. Optional - compressed deployed files:
 ==========================================
-1. Override IMAGE_FSTYPES in local.conf
-	IMAGE_FSTYPES = "tar.bz2 ext3.xz rpi-sdimg.xz
-2. Override SDIMG_ROOTFS_TYPE in local.conf
+1. Overwrite IMAGE_FSTYPES in local.conf
+	IMAGE_FSTYPES = "tar.bz2 ext3.xz"
+2. Overwrite SDIMG_ROOTFS_TYPE in local.conf
 	SDIMG_ROOTFS_TYPE = "ext3.xz"
-*Accommodate the values above to your own needs (ex: ext3 / tar.bz2).
+3. Overwrite SDIMG_COMPRESSION in local.conf
+	SDIMG_COMPRESSION = "xz"
+*Accommodate the values above to your own needs (ex: ext3 / ext4).
 
 2.B. Optional - GPU memory:
 ===========================
@@ -181,37 +188,64 @@ adding to you local.conf:
 LICENSE_FLAGS_WHITELIST = "commercial"
 
 
-4. Contributing
-===============
+4. Source code and mirrors
+==========================
 
-To contribute to this fork, request additional packages, or report issues, please use the issue tracker on github:
-
-    https://github.com/sarnold/meta-raspberrypi/issues
-
-If you have a fork on github, feel free to make a pull request (sarnold fork).
-
-Source code:
-
-    https://github.com/sarnold/meta-raspberrypi
-
-To contribute to the upstream layer you should send the patches for review to the mailing list.
-
-Mailing list:
-
-    https://lists.yoctoproject.org/listinfo/yocto
-
-Upstream Source code:
-
+Main repo:
     git://git.yoctoproject.org/meta-raspberrypi
     http://git.yoctoproject.org/git/meta-raspberrypi
+
+Github mirror:
     https://github.com/djwillis/meta-raspberrypi
 
-When sending patches upstream, please use something like:
+Gerrit review repo:
+    https://review.gherzan.ro:8443/meta-raspberrypi
 
-git send-email --to yocto@yoctoproject.org \
---subject-prefix='meta-raspberrypi][PATCH'
 
-Maintainer of this fork: Steve Arnold <stephen.arnold42 at gmail.com>
+5. Contributing
+===============
 
-Upstream Layer maintainers: John Willis <John.Willis at distant-earth.com>
-                            Andrei Gherzan <andrei at gherzan.ro>
+5.A. Mailing list
+=================
+To contribute to this layer you should send the patches for review to the
+mailing list.
+
+Mailing list:
+    https://lists.yoctoproject.org/listinfo/yocto
+
+To send changes to mailing list use something like:
+    git send-email --to yocto@yoctoproject.org \
+    --subject-prefix='meta-raspberrypi][PATCH'
+
+OPTIONALLY push changes to gerrit (help maintainers merge and review patches
+easier in this way).
+    git push ssh://<username>@review.gherzan.ro:29418/meta-raspberrypi
+    <local-branch>:refs/for/master
+    See 5.B. Gerrit Review Server.
+
+5.B. Gerrit Review Server
+=========================
+We have a gerrit server configured at review.gherzan.ro. Changes made in gerrit
+are merged in git.yoctoproject.org/meta-raspberrypi.
+
+You can setup a gerrit account in less than 2 minutes:
+A) Login / Register on https://review.gherzan.ro:8443.
+B) Add your PUBLIC key in Settings/SSH Public Keys.
+C) Add remote in your local repo:
+    git remote add gherzan ssh://<username>@review.gherzan.ro:29418/meta-raspberrypi
+D) Push changes to gerrit using:
+    git push gherzan <local-branch>:refs/for/master
+
+Please check your spam folder for gerrit messages. Sometimes they end up there.
+
+5.C. Trello Board
+=================
+A public Trello board is set to manage tasks and bugs. Join us there:
+    https://trello.com/b/QsYeVjVe/meta-raspberrypi
+
+
+6. Maintainers
+==============
+
+    John Willis <John.Willis at distant-earth.com>
+    Andrei Gherzan <andrei at gherzan.ro>
