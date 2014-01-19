@@ -11,7 +11,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
-SRC_URI = "http://www.open.com.au/mikem/bcm2835/bcm2835-${PV}.tar.gz"
+SRC_URI = "http://www.airspayce.com/mikem/bcm2835/${P}.tar.gz"
 
 SRC_URI[md5sum] = "35df4a6188e36796a07985f1561fb8a2"
 SRC_URI[sha256sum] = "ea99538ea17ebed38973743d84b1358e8c0fd311e8828c4ef91694f65a1073ff"
