@@ -4,7 +4,7 @@ PRINC := "${@int(PRINC) + 2}"
 
 SRC_URI_append = "file://alsa.conf"
 
-do_configure_prepend() {
+do_compile_prepend() {
     sed -i -e "s|pcm.front cards.pcm.front|pcm.front cards.pcm.default|" \
         ${S}/src/conf/alsa.conf
 }
