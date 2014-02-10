@@ -3,6 +3,8 @@ LICENSE = "Proprietary"
 
 LIC_FILES_CHKSUM = "file://LICENCE.broadcom;md5=e86e693d19572ee64cc8b17fb062faa9"
 
+inherit deploy
+
 include ../common/firmware.inc
 
 RDEPENDS_${PN} = "rpi-config"
@@ -12,8 +14,6 @@ COMPATIBLE_MACHINE = "raspberrypi"
 S = "${RPIFW_S}/boot"
 
 PR = "r3"
-
-addtask deploy before do_package after do_install
 
 do_deploy() {
 	install -d ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles
@@ -35,4 +35,8 @@ do_deploy() {
 	touch ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/${PN}-${PV}.stamp
 }
 
+addtask deploy before do_package after do_install
+do_deploy[dirs] += "${DEPLOYDIR}/${PN}"
+
 PACKAGE_ARCH = "${MACHINE_ARCH}"
+
