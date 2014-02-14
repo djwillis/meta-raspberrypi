@@ -16,23 +16,26 @@ S = "${RPIFW_S}/boot"
 PR = "r3"
 
 do_deploy() {
-	install -d ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles
-	for i in *.elf ; do
-		cp $i ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles
+	install -d ${DEPLOYDIR}/${PN}
+
+	for i in ${S}/*.elf ; do
+		cp $i ${DEPLOYDIR}/${PN}
 	done
-	for i in *.dat ; do
-		cp $i ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles
+
+	for i in ${S}/*.dat ; do
+		cp $i ${DEPLOYDIR}/${PN}
 	done
-	for i in *.bin ; do
-		cp $i ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles
+
+	for i in ${S}/*.bin ; do
+		cp $i ${DEPLOYDIR}/${PN}
 	done
 
 	# set a specific audio output for alsa (auto is known to be problematic)
 	sed -i -e "s|#hdmi_drive=2|hdmi_drive=${DEFAULT_AUDIO_OUT}|" \
-		${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/config.txt
+		${DEPLOY_DIR_IMAGE}/${PN}/config.txt
 
 	# Add stamp in deploy directory
-	touch ${DEPLOY_DIR_IMAGE}/bcm2835-bootfiles/${PN}-${PV}.stamp
+	touch ${DEPLOYDIR}/${PN}/${PN}-${PV}.stamp
 }
 
 addtask deploy before do_package after do_install
