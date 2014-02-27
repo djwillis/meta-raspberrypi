@@ -3,7 +3,8 @@ LICENSE = "Proprietary"
 
 LIC_FILES_CHKSUM = "file://LICENCE;md5=86e53f5f5909ee66900418028de11780"
 
-PROVIDES = "virtual/libgles2 virtual/egl"
+PROVIDES = "virtual/libgles1 virtual/libgles2 virtual/egl"
+
 COMPATIBLE_MACHINE = "raspberrypi"
 
 include ../common/firmware.inc

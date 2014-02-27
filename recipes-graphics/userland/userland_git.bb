@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=957f6640d5e2d2acfce73a36a56cb32f"
 
 PR = "r4"
 
-PROVIDES = "virtual/libgles2 \
+PROVIDES = "virtual/libgles1 \
+            virtual/libgles2 \
             virtual/egl"
+
 COMPATIBLE_MACHINE = "raspberrypi"
 
 SRCREV = "8181677fc08814cd5fcd1475ab73046f89f8dc80"
