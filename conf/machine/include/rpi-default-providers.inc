@@ -11,5 +11,5 @@ PREFERRED_PROVIDER_virtual/libgles2 ?= "vc-graphics-hardfp"
 PREFERRED_PROVIDER_virtual/libgl ?= "mesa-gl"
 PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 
-PREFERRED_PROVIDER_jpeg = "jpeg-turbo"
-PREFERRED_PROVIDER_jpeg-native = "jpeg-turbo-native"
+PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
+PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
