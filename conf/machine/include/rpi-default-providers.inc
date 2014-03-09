@@ -13,3 +13,5 @@ PREFERRED_PROVIDER_virtual/mesa ?= "mesa-gl"
 
 PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
+
+PREFERRED_PROVIDER_xserver-nodm-init = "lxdm"
