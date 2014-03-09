@@ -20,7 +20,10 @@ CMDLINE_raspberrypi = "dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA
 UDEV_GE_141 ?= "1"
 
 do_configure_prepend() {
-    install -m 0644 ${S}/arch/${ARCH}/configs/${KERNEL_DEFCONFIG} ${WORKDIR}/defconfig || die "No default configuration for ${MACHINE} / ${KERNEL_DEFCONFIG} available."
+    if ! [ -e "${WORKDIR}/defconfig" ] ; then
+        install -m 0644 ${S}/arch/${ARCH}/configs/${KERNEL_DEFCONFIG} ${WORKDIR}/defconfig \
+            || die "No default configuration for ${MACHINE} / ${KERNEL_DEFCONFIG} available."
+    fi
 }
 
 do_install_prepend() {
