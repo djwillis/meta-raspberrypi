@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://volatiles"
+SRC_URI_append = " file://volatiles "
 
 do_install_append() {
     install -d ${D}${sysconfdir}/default/volatiles

@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI += "file://modules"
+SRC_URI_append = " file://modules "
 
 conffiles += " ${sysconfdir}/modules"
 
