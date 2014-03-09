@@ -1,5 +1,3 @@
-PRINC := "${@int(PRINC) + 2}"
-
 #
 # FIXME
 # We need a way to disable EGL and GL ES2, these are provided by userland package

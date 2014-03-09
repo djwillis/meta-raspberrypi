@@ -1,6 +1,5 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-PRINC := "${@int(PRINC) + 1}"
 
 do_install_append() {
     sed -i -e '/# %sudo/a %sudo	ALL=(ALL) ALL' \
