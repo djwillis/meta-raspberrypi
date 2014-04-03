@@ -5,18 +5,20 @@ PR = "r0"
 
 include rpi-hwup-image.bb
 
-EXTRA_IMAGE_FEATURES = "debug-tweaks"
+EXTRA_IMAGE_FEATURES = ""
 
-IMAGE_FEATURES += " ssh-server-openssh splash package-management hwcodecs \
-    ${EXTRA_IMAGE_FEATURES} "
-
-IMAGE_INSTALL += " \
-    ${CORE_IMAGE_BASE_INSTALL} \
-    ${CORE_IMAGE_EXTRA_INSTALL} \
-    rpiuser-account \
-    sudo \
+IMAGE_FEATURES += " \
+    ssh-server-openssh \
+    splash \
+    package-management \
+    hwcodecs \
+    ${EXTRA_IMAGE_FEATURES} \
 "
 
-# see meta-alt-desktop-extras for a much more full-featured console image
+IMAGE_INSTALL += " \
+    rpiuser-account \
+    sudo \
+    nano \
+"
 
 export IMAGE_BASENAME = "rpi-console-image"
