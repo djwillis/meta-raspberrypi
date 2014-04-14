@@ -35,3 +35,8 @@ do_deploy_append() {
     install -d ${DEPLOYDIR}/bcm2835-bootfiles
     echo "${CMDLINE}" > ${DEPLOYDIR}/bcm2835-bootfiles/cmdline.txt
 }
+
+PACKAGES =+ "linux-raspberrypi-firmware"
+RPROVIDES_${PN}-firmware = "linux-firmware"
+FILES_${PN}-firmware = "/lib/firmware/*"
+
