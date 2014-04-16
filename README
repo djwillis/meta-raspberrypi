@@ -58,7 +58,7 @@ More information can be found at:
 
              http://www.raspberrypi.org/ (official RPi site)
              http://www.distant-earth.com/ (upstream author layer site)
-             http://www.gentoogeek.org/ (sarnold layer site)
+             https://github.com/sarnold/meta-alt-desktop-extras/wiki
 
 Build scripts patched to support making a firmware image for the RaspberryPi
 with Angstrom can be found at:
@@ -67,7 +67,8 @@ with Angstrom can be found at:
 
 When not depending on meta-openembedded and not using systemd, you may 
 need to mask few recipes requiring systemd or other recipes not included 
-in your distribution of choice (note: rpi-xorg image builds without systemd).
+in your distribution of choice (note: xorg-openbox image builds without 
+systemd).
 
 You can achieve this by adding something like the following to local.conf:
 
@@ -84,7 +85,7 @@ OpenEmbedded/Yocto distributions and layer stacks, such as:
 * Angstrom (main focus of upstream testing).
 * Yocto/Poky (main focus of this fork; see Section 2 below).
 
-This (upstrem) layer in its entirety depends on:
+This layer in its entirety depends on:
 
 URI: git://git.openembedded.org/openembedded-core
 branch: master
@@ -98,7 +99,7 @@ revision: HEAD
 2. Yocto BSP Layer - RaspberryPi
 ================================
 
-This (sarnold forked) layer depends on:
+This layer depends on:
 
 URI: git://git.yoctoproject.org/poky
 branch: master
@@ -116,7 +117,8 @@ How to use it:
   (for basic upstream hw image)
     - meta-raspberrypi
     - meta-openembedded/meta-oe
-  (for rpi-xorg or rpi-sato images)
+  (for xorg-openbox image)
+    - meta-alt-desktop-extras
     - meta-openembedded/meta-gnome
     - meta-openembedded/meta-networking
     - meta-openembedded/meta-multimedia
@@ -124,7 +126,7 @@ How to use it:
     - meta-openembedded/meta-xfce
 3  Set MACHINE to raspberrypi in local.conf
 4. Set any other desired parameters in local.conf (see following sections)
-5. bitbake [rpi-hwup-image|rpi-xorg-image|rpi-sato-image]
+5. bitbake [rpi-hwup-image|xorg-openbox-image|console-image-plus]
 6. dd the .sdimg file to an SD card
 7. Boot your RPi.
 
@@ -203,6 +205,8 @@ VIDEO_CAMERA = "1"
 * rpi-test-image
     Image based on rpi-basic-image which includes most of the packages in this
     layer and some media samples.
+* rpi-console-image (this fork)
+    Adds package management and hwcodecs (if available) to rpi-basic-image
 
 2.H. Boot to U-Boot
 ===================

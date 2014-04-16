@@ -3,13 +3,11 @@ DESCRIPTION = "A custom console image based on rpi and core images"
 
 PR = "r0"
 
-include rpi-hwup-image.bb
+include rpi-basic-image.bb
 
-EXTRA_IMAGE_FEATURES = ""
+EXTRA_IMAGE_FEATURES = "debug-tweaks"
 
 IMAGE_FEATURES += " \
-    ssh-server-openssh \
-    splash \
     package-management \
     hwcodecs \
     ${EXTRA_IMAGE_FEATURES} \
