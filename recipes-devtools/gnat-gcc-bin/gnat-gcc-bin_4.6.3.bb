@@ -16,19 +16,24 @@ SRC_URI = "http://${BIN_URL}/files/arm-gnat-gcc/${BIN_PKG};unpack=false \
 
 S = "${WORKDIR}"
 
-INCPR = "r0"
+PR = "r1"
 
 do_install () {
     tar xjf ${WORKDIR}/${BIN_PKG} -C ${D}
+    install -d ${D}/opt
+    mv ${D}${prefix}/* ${D}/opt/
+    rm -rf ${D}${prefix}
 }
 
-PACKAGES += "gnat-gcc-runtime-dbg gnat-gcc-runtime-staticdev gnat-gcc-runtime"
+FILES_${PN} = "/opt/*"
+FILES_${PN}-dbg += "/opt/bin/.debug /opt/lib/*/*/*/.debug /opt/lib/*/*/*/*/.debug"
+FILES_${PN}-staticdev += "/opt/lib/*.a /opt/lib/*/*/*/*.a /opt/lib/*/*/*/*/*.a"
 
-FILES_gnat-gcc-runtime-dbg += "${libdir}/gcc/*/*/.debug ${libdir}/gcc/*/*/*/.debug"
-FILES_gnat-gcc-runtime-staticdev += "${libdir}/gcc/*/*/*.a ${libdir}/gcc/*/*/*/*.a"
-FILES_gnat-gcc-runtime = "${libdir}/gcc"
-
-RDEPENDS_${PN} += "gnat-gcc-runtime gnat-gcc-runtime-staticdev"
+#PACKAGES += "gnat-gcc-runtime-dbg gnat-gcc-runtime-staticdev gnat-gcc-runtime"
+#FILES_gnat-gcc-runtime-dbg += "${libdir}/gcc/*/*/.debug ${libdir}/gcc/*/*/*/.debug"
+#FILES_gnat-gcc-runtime-staticdev += "${libdir}/gcc/*/*/*.a ${libdir}/gcc/*/*/*/*.a"
+#FILES_gnat-gcc-runtime = "${libdir}/gcc"
+#RDEPENDS_${PN} += "gnat-gcc-runtime gnat-gcc-runtime-staticdev"
 
 # These are binaries generated elsewhere so don't check ldflags
 INSANE_SKIP = "true"
