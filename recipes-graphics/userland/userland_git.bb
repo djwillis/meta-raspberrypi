@@ -13,7 +13,7 @@ PROVIDES = "virtual/libgles1 \
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
-SRCREV = "8181677fc08814cd5fcd1475ab73046f89f8dc80"
+SRCREV = "eccb81050afd177da1923404b366c6226f29bfe0"
 SRC_URI = "git://github.com/raspberrypi/userland.git;protocol=git;branch=master \
           "
 S = "${WORKDIR}/git"
