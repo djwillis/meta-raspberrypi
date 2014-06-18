@@ -13,14 +13,17 @@ PROVIDES = "virtual/libgles1 \
 
 COMPATIBLE_MACHINE = "raspberrypi"
 
+SRCBRANCH = "master"
+SRCFORK = "raspberrypi"
 SRCREV = "eccb81050afd177da1923404b366c6226f29bfe0"
-SRC_URI = "git://github.com/raspberrypi/userland.git;protocol=git;branch=master \
+
+SRC_URI = "git://github.com/${SRCFORK}/userland.git;protocol=git;branch=${SRCBRANCH} \
           "
 S = "${WORKDIR}/git"
 
 inherit cmake
 
-EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release"
+EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS='-Wl,--no-as-needed'"
 
 # The compiled binaries don't provide sonames.
 SOLIBS = "${SOLIBSDEV}"
