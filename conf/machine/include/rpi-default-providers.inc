@@ -14,6 +14,7 @@ PREFERRED_PROVIDER_jpeg = "libjpeg-turbo"
 PREFERRED_PROVIDER_jpeg-native = "libjpeg-turbo-native"
 
 PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-PREFERRED_PROVIDER_xserver-nodm-init = "lxdm"
+#PREFERRED_PROVIDER_xserver_common = "x11-common"
+#PREFERRED_PROVIDER_xserver-nodm-init = "lxdm"
 
 
