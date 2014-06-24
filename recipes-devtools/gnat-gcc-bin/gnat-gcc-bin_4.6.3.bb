@@ -19,15 +19,14 @@ S = "${WORKDIR}"
 PR = "r1"
 
 do_install () {
-    tar xjf ${WORKDIR}/${BIN_PKG} -C ${D}
-    install -d ${D}/opt
-    mv ${D}${prefix}/* ${D}/opt/
-    rm -rf ${D}${prefix}
+    GNATROOT=/opt/armv6j-hardfloat-linux-gnueabi
+    install -d ${D}${GNATROOT}
+    tar xjf ${WORKDIR}/${BIN_PKG} -C ${D}${GNATROOT}
 }
 
-FILES_${PN} = "/opt/*"
-FILES_${PN}-dbg += "/opt/bin/.debug /opt/lib/*/*/*/.debug /opt/lib/*/*/*/*/.debug"
-FILES_${PN}-staticdev += "/opt/lib/*.a /opt/lib/*/*/*/*.a /opt/lib/*/*/*/*/*.a"
+FILES_${PN} = "${GNATROOT}/*"
+FILES_${PN}-dbg += "${GNATROOT}/bin/.debug /opt/lib/*/*/*/.debug /opt/lib/*/*/*/*/.debug"
+FILES_${PN}-staticdev += "${GNATROOT}/lib/*.a /opt/lib/*/*/*/*.a /opt/lib/*/*/*/*/*.a"
 
 #PACKAGES += "gnat-gcc-runtime-dbg gnat-gcc-runtime-staticdev gnat-gcc-runtime"
 #FILES_gnat-gcc-runtime-dbg += "${libdir}/gcc/*/*/.debug ${libdir}/gcc/*/*/*/.debug"
