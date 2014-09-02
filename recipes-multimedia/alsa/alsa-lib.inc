@@ -3,7 +3,7 @@ do_compile_prepend() {
         ${S}/src/conf/alsa.conf
 }
 
-do_install_append() {
+do_install_append_class-target() {
     install -d ${D}${sysconfdir}/modprobe.d
     install -m 0644 ${WORKDIR}/alsa.conf ${D}${sysconfdir}/modprobe.d/
 }
