@@ -1,29 +1,2 @@
 The github mirror was moved to https://github.com/agherzan/meta-raspberrypi
 This repository is not maintained anymore.
-
-Quick links
-===========
-Git repository web frontend:
-    http://git.yoctoproject.org/cgit/cgit.cgi/meta-raspberrypi/
-Mailing list (yocto mailing list):
-    yocto@yoctoproject.org
-Issues management (redmine):
-    http://redmine.gherzan.ro/projects/meta-raspberrypi
-Change review (gerrit):
-    https://review.gherzan.ro:8443/#/q/project:meta-raspberrypi
-
-Source code and mirrors
-==========================
-
-Main repo:
-    git://git.yoctoproject.org/meta-raspberrypi
-    http://git.yoctoproject.org/git/meta-raspberrypi
-
-Github mirror:
-    https://github.com/djwillis/meta-raspberrypi
-
-Bitbucket mirror:
-    https://bitbucket.org/agherzan/meta-raspberrypi
-
-Gerrit review repo:
-    https://review.gherzan.ro:8443/meta-raspberrypi
